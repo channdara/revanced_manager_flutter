@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- For sharing files in the external storage -->
+    <external-path
+        name="external_files"
+        path="." />
+    <!-- For sharing files in app-specific cache directories -->
+    <cache-path
+        name="cache_files"
+        path="." />
+</paths>
+

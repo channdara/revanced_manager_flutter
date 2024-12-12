@@ -1,16 +1,13 @@
-# revanced_manager_flutter
+# ReVanced Manager Flutter
 
-A new Flutter project.
+A fun project, rebuilding the original ReVanced Manager using Flutter framework. Please refer to the original website or
+applications by the sources below.
 
-## Getting Started
+# ReVanced Apps
 
-This project is a starting point for a Flutter application.
+Welcome to ReVanced Manager, your go-to tool for managing ReVanced apps and other modded APKs. Developed by the
+revanced.net team, ReVanced Manager is inspired by the old popular app named Vanced Manager. We've taken the concept and
+enhanced it to provide you with a seamless experience in managing and updating your favorite apps.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* ReVanced website: https://revanced.net
+* ReVanced Manager: https://github.com/revancedapps/revancedmanager

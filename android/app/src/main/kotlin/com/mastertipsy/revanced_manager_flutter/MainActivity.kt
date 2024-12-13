@@ -14,7 +14,7 @@ import java.io.File
 
 class MainActivity : FlutterActivity() {
     companion object {
-        private const val CHANNEL: String = "com.revanced.net.revancedmanager"
+        private const val CHANNEL: String = "com.mastertipsy.revancedmanager"
     }
 
     private lateinit var channel: MethodChannel
@@ -58,7 +58,7 @@ class MainActivity : FlutterActivity() {
 
     private fun installApk(filePath: String) {
         val file = File(filePath)
-        val uri = FileProvider.getUriForFile(this, "com.revanced.net.revancedmanager", file)
+        val uri = FileProvider.getUriForFile(this, "com.mastertipsy.revancedmanager", file)
         val intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
         intent.data = uri
         intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION

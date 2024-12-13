@@ -84,11 +84,10 @@ class _MainItemWidgetState
               ],
             ),
           ),
-          if (true != widget.application.isManagerApp)
-            MainItemActionWidget(
-              bloc: bloc,
-              application: widget.application,
-            ),
+          MainItemActionWidget(
+            bloc: bloc,
+            application: widget.application,
+          ),
         ],
       ),
     );

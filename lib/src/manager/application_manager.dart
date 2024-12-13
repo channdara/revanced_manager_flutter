@@ -15,7 +15,7 @@ class ApplicationManager {
   static final ApplicationManager _instance = ApplicationManager._();
 
   final MethodChannel _channel =
-      const MethodChannel('com.revanced.net.revancedmanager');
+      const MethodChannel('com.mastertipsy.revancedmanager');
 
   Future<void> installApk(String filePath) async {
     try {

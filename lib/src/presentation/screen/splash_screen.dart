@@ -22,6 +22,24 @@ class _SplashScreenState extends BaseStateful<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar());
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: ClipRRect(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          borderRadius: BorderRadius.circular(32.0),
+          child: Image.asset(
+            'android/app/src/main/ic_launcher-playstore.png',
+            width: MediaQuery.sizeOf(context).width / 3,
+          ),
+        ),
+      ),
+      bottomNavigationBar: const BottomAppBar(
+        color: Colors.transparent,
+        height: kToolbarHeight,
+        padding: EdgeInsets.zero,
+        child: Center(child: Text('This is not the original ReVanced Manager')),
+      ),
+    );
   }
 }

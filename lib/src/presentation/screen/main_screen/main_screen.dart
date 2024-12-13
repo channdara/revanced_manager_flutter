@@ -72,8 +72,8 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
                   padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
-                    children: state.items.map((application) {
-                      return MainItemWidget(application: application);
+                    children: state.items.map((app) {
+                      return MainItemWidget(app: app);
                     }).toList(),
                   ),
                 ),

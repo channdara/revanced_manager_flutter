@@ -9,19 +9,19 @@ class MainItemActionWidget extends StatelessWidget {
   const MainItemActionWidget({
     super.key,
     required this.bloc,
-    required this.application,
+    required this.app,
   });
 
   final MainItemBloc bloc;
-  final RevancedApplication application;
+  final RevancedApplication app;
 
-  String get _packageName => application.androidPackageName ?? '';
+  String get _packageName => app.androidPackageName ?? '';
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (application.updateAvailable)
+        if (app.updateAvailable)
           Expanded(
             child: ElevatedButton(
               onPressed: () {},
@@ -32,7 +32,7 @@ class MainItemActionWidget extends StatelessWidget {
               child: const Text('Update'),
             ),
           ),
-        if (true == application.isInstalled)
+        if (true == app.isInstalled)
           Expanded(
             child: ElevatedButton(
               onPressed: () {
@@ -45,7 +45,7 @@ class MainItemActionWidget extends StatelessWidget {
               child: const Text('Uninstall'),
             ),
           ),
-        if (true == application.isInstalled)
+        if (true == app.isInstalled)
           Expanded(
             child: ElevatedButton(
               onPressed: () {
@@ -57,11 +57,11 @@ class MainItemActionWidget extends StatelessWidget {
               child: const Text('Open'),
             ),
           ),
-        if (true != application.isInstalled)
+        if (true != app.isInstalled)
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                bloc.startDownloadApplication(application);
+                bloc.startDownloadApplication(app);
               },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(),
@@ -72,8 +72,8 @@ class MainItemActionWidget extends StatelessWidget {
                   if (bloc.downloading) {
                     return LinearProgressIndicator(
                       value: bloc.progressing,
-                      minHeight: 16.0,
-                      borderRadius: BorderRadius.circular(8.0),
+                      minHeight: 12.0,
+                      borderRadius: BorderRadius.circular(6.0),
                     );
                   }
                   return const Text('Download');

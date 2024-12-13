@@ -7,9 +7,9 @@ import '../bloc/main_item_bloc.dart';
 import 'main_item_action_widget.dart';
 
 class MainItemWidget extends StatefulWidget {
-  const MainItemWidget({super.key, required this.application});
+  const MainItemWidget({super.key, required this.app});
 
-  final RevancedApplication application;
+  final RevancedApplication app;
 
   @override
   State<MainItemWidget> createState() => _MainItemWidgetState();
@@ -34,7 +34,7 @@ class _MainItemWidgetState
                 width: 86.0,
                 margin: const EdgeInsets.all(16.0),
                 child: CachedNetworkImage(
-                  imageUrl: widget.application.icon ?? '',
+                  imageUrl: widget.app.icon ?? '',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -45,7 +45,7 @@ class _MainItemWidgetState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.application.appName ?? '',
+                        widget.app.appName ?? '',
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -53,7 +53,7 @@ class _MainItemWidgetState
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        widget.application.appShortDescription ?? '',
+                        widget.app.appShortDescription ?? '',
                         style: const TextStyle(
                           fontSize: 12.0,
                           color: Colors.grey,
@@ -70,7 +70,7 @@ class _MainItemWidgetState
             child: Row(
               children: [
                 Text(
-                  'Installed: ${widget.application.installedVersionCode ?? 'N/A'}',
+                  'Installed: ${widget.app.installedVersionCode ?? 'N/A'}',
                   style: const TextStyle(fontSize: 12.0),
                 ),
                 const Padding(
@@ -78,7 +78,7 @@ class _MainItemWidgetState
                   child: Icon(Icons.arrow_right_alt_rounded),
                 ),
                 Text(
-                  'Latest: ${widget.application.latestVersionCode ?? 'N/A'}',
+                  'Latest: ${widget.app.latestVersionCode ?? 'N/A'}',
                   style: const TextStyle(fontSize: 12.0),
                 ),
               ],
@@ -86,7 +86,7 @@ class _MainItemWidgetState
           ),
           MainItemActionWidget(
             bloc: bloc,
-            application: widget.application,
+            app: widget.app,
           ),
         ],
       ),

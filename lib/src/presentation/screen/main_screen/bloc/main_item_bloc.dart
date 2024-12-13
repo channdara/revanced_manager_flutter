@@ -10,12 +10,12 @@ class MainItemBloc extends BaseBloc {
   bool downloading = false;
   double progressing = 0.0;
 
-  void startDownloadApplication(RevancedApplication application) {
+  void startDownloadApplication(RevancedApplication app) {
     execute(requesting: () async {
       downloading = true;
       safeEmit(MainStateDownload());
       DownloadManager().downloadRevancedApplication(
-        application,
+        app,
         (progress) {
           progressing = progress;
         },

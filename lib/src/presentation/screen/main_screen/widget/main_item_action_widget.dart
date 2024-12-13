@@ -36,7 +36,7 @@ class MainItemActionWidget extends StatelessWidget {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                ApplicationManager().uninstall(_packageName);
+                ApplicationManager().uninstallApk(_packageName);
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.red,
@@ -49,7 +49,7 @@ class MainItemActionWidget extends StatelessWidget {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                ApplicationManager().open(_packageName);
+                ApplicationManager().openApp(_packageName);
               },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(),

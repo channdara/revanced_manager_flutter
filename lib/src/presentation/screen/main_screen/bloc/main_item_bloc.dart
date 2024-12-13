@@ -24,7 +24,7 @@ class MainItemBloc extends BaseBloc {
         progressing = 0.0;
         safeEmit(MainStateDownload());
         if (filePath.isNotEmpty) {
-          ApplicationManager().install(filePath);
+          ApplicationManager().installApk(filePath);
         }
       });
       Timer.periodic(const Duration(milliseconds: 250), (timer) {

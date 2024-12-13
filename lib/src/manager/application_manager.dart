@@ -1,3 +1,4 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:installed_apps/installed_apps.dart';
 
@@ -16,22 +17,28 @@ class ApplicationManager {
   final MethodChannel _channel =
       const MethodChannel('com.revanced.net.revancedmanager');
 
-  Future<void> install(String filePath) async {
+  Future<void> installApk(String filePath) async {
     try {
       await _channel.invokeMethod('installApk', {'filePath': filePath});
     } catch (_) {}
   }
 
-  Future<void> uninstall(String packageName) async {
+  Future<void> uninstallApk(String packageName) async {
     try {
       await _channel.invokeMethod('uninstallApk', {'packageName': packageName});
     } catch (_) {}
   }
 
-  Future<void> open(String packageName) async {
+  Future<void> openApp(String packageName) async {
     try {
       await InstalledApps.startApp(packageName);
     } catch (_) {}
+  }
+
+  Future<String> getCPUArchitecture() async {
+    final deviceInfo = DeviceInfoPlugin();
+    final androidInfo = await deviceInfo.androidInfo;
+    return androidInfo.supportedAbis.join(', ');
   }
 
   void _setMethodCallHandler() {

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../model/revanced_application.dart';
+import 'application_manager.dart';
 
 class ApiManager {
   factory ApiManager() => _instance;
@@ -11,6 +12,8 @@ class ApiManager {
 
   static const Duration _timeout = Duration(seconds: 20);
 
+  String _endpoint = '';
+
   final Dio _dio = Dio(BaseOptions(
     baseUrl: 'https://revanced.net',
     connectTimeout: _timeout,
@@ -19,7 +22,29 @@ class ApiManager {
   ));
 
   Future<List<RevancedApplication>> getRevancedApplications() async {
-    final response = await _dio.get('/revanced-apps.json');
-    return RevancedApplication.fromJsonList(response.data);
+    if (_endpoint.isEmpty) _endpoint = await _getEndpointByCPUArchitecture();
+    final response = await _dio.get(_endpoint);
+    final items = await RevancedApplication.fromJsonList(response.data);
+    items.sort((current, next) => current.isInstalled != next.isInstalled
+        ? ((next.isInstalled ?? false) ? 1 : -1)
+        : (current.index ?? 0).compareTo(next.index ?? 0));
+    return items;
+  }
+
+  Future<String> _getEndpointByCPUArchitecture() async {
+    final architecture = await ApplicationManager().getCPUArchitecture();
+    if (architecture.contains('arm64-v8a')) {
+      return '/revanced-apps-arm64-v8a.json';
+    }
+    if (architecture.contains('armeabi-v7a')) {
+      return '/revanced-apps-armeabi-v7a.json';
+    }
+    if (architecture.contains('x86')) {
+      return '/revanced-apps-x86.json';
+    }
+    if (architecture.contains('x86_64')) {
+      return '/revanced-apps-x86_64.json';
+    }
+    return '/revanced-apps.json';
   }
 }

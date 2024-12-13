@@ -7,6 +7,18 @@ import 'main_bloc_state.dart';
 class MainBloc extends BaseBloc {
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
+  final ScrollController scrollController = ScrollController();
+
+  bool get canPop =>
+      scrollController.hasClients && scrollController.offset < 50.0;
+
+  void animateToTop() {
+    scrollController.animateTo(
+      0.0,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.linear,
+    );
+  }
 
   void reloadApplications() {
     refreshIndicatorKey.currentState?.show();

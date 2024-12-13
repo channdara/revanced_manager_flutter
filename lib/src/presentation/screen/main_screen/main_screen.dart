@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
@@ -34,44 +35,53 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Revanced Manager'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const SettingsScreen()));
-            },
-            icon: const Icon(Icons.settings_rounded),
-          ),
-        ],
-      ),
-      body: bloc.builder(
-        builder: (context, state) {
-          if (state is AppBlocStateLoading) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(strokeWidth: 3.0),
-            );
-          }
-          if (state is MainStateGotData) {
-            return RefreshIndicator(
-              key: bloc.refreshIndicatorKey,
-              onRefresh: bloc.getRevancedApplications,
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16.0),
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  children: state.items.map((application) {
-                    return MainItemWidget(application: application);
-                  }).toList(),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (value, result) {
+        bloc.canPop
+            ? SystemChannels.platform.invokeMethod('SystemNavigator.pop')
+            : bloc.animateToTop();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Revanced Manager'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const SettingsScreen()));
+              },
+              icon: const Icon(Icons.settings_rounded),
+            ),
+          ],
+        ),
+        body: bloc.builder(
+          builder: (context, state) {
+            if (state is AppBlocStateLoading) {
+              return const Center(
+                child: CircularProgressIndicator.adaptive(strokeWidth: 3.0),
+              );
+            }
+            if (state is MainStateGotData) {
+              return RefreshIndicator(
+                key: bloc.refreshIndicatorKey,
+                onRefresh: bloc.getRevancedApplications,
+                child: SingleChildScrollView(
+                  controller: bloc.scrollController,
+                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    children: state.items.map((application) {
+                      return MainItemWidget(application: application);
+                    }).toList(),
+                  ),
                 ),
-              ),
-            );
-          }
-          return const SizedBox();
-        },
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }

@@ -15,13 +15,15 @@ class RevancedApplication {
     /// From Local
     this.isInstalled,
     this.installedVersionCode,
+    this.isManagerApp,
   );
 
   factory RevancedApplication.fromJson(dynamic json) {
+    final packageName = json['androidPackageName'] as String?;
     return RevancedApplication(
       /// From API
       json['appName'] as String?,
-      json['androidPackageName'] as String?,
+      packageName,
       json['latestVersionCode'] as String?,
       json['appShortDescription'] as String?,
       json['requireMicroG'] as bool?,
@@ -32,6 +34,7 @@ class RevancedApplication {
       /// From Local
       null,
       null,
+      packageName?.contains('revancedmanager'),
     );
   }
 
@@ -70,6 +73,7 @@ class RevancedApplication {
   /// From Local
   final bool? isInstalled;
   final String? installedVersionCode;
+  final bool? isManagerApp;
 
   RevancedApplication copy({
     bool? isInstalled,
@@ -86,6 +90,7 @@ class RevancedApplication {
       index,
       isInstalled ?? this.isInstalled,
       installedVersionCode ?? this.installedVersionCode,
+      isManagerApp,
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../base/base_stateful.dart';
 import '../../manager/callback_manager.dart';
 import '../../manager/preferences_manager.dart';
+import '../dialog/preset_color_picker_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -44,7 +45,15 @@ class _SettingsScreenState extends BaseStateful<SettingsScreen> {
             ListTile(
               title: const Text('Accent Color'),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showPresetColorPickerDialog(context).then((color) {
+                    if (color == null) return;
+                    PreferencesManager().accentColor(color);
+                    Future.delayed(const Duration(milliseconds: 200), () {
+                      CallbackManager().updateAccentColorCallback?.call(color);
+                    });
+                  });
+                },
                 icon: Icon(
                   Icons.circle,
                   color: Theme.of(context).colorScheme.primary,

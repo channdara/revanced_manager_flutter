@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'src/base/base_stateful.dart';
 import 'src/manager/callback_manager.dart';
 import 'src/manager/preferences_manager.dart';
 import 'src/presentation/screen/splash_screen.dart';
@@ -19,7 +20,7 @@ class Application extends StatefulWidget {
   State<Application> createState() => _ApplicationState();
 }
 
-class _ApplicationState extends State<Application> {
+class _ApplicationState extends BaseStateful<Application> {
   ThemeMode _themeMode = ThemeMode.system;
 
   @override

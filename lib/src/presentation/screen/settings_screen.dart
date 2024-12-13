@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../base/base_stateful.dart';
 import '../../manager/callback_manager.dart';
 import '../../manager/preferences_manager.dart';
 
@@ -10,7 +11,7 @@ class SettingsScreen extends StatefulWidget {
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends BaseStateful<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

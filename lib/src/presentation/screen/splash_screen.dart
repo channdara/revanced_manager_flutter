@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../base/base_stateful.dart';
 import 'main_screen/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,10 +10,10 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends BaseStateful<SplashScreen> {
   @override
-  void initState() {
-    super.initState();
+  void initStatePostFrameCallback() {
+    super.initStatePostFrameCallback();
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const MainScreen()));

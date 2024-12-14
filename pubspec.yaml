@@ -7,7 +7,8 @@ scripts:
   clean: 'flutter clean && flutter pub get'
   build: 'flutter build apk --release'
   open: 'open build/app/outputs/flutter-apk'
-  prod: 'rps clean && rps build && rps open'
+  rename: 'dart run lib/script.dart'
+  prod: 'rps clean && rps build && rps rename && rps open'
 
 environment:
   sdk: ^3.5.4
@@ -18,6 +19,7 @@ dependencies:
 
   dio: ^5.7.0
   intl: ^0.20.1
+  yaml: ^3.1.2
   flutter_bloc: ^8.1.6
   url_launcher: ^6.3.1
   path_provider: ^2.1.5

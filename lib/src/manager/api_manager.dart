@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../model/my_application.dart';
 import '../model/revanced_application.dart';
 import 'application_manager.dart';
 
@@ -14,8 +15,14 @@ class ApiManager {
 
   String _endpoint = '';
 
-  final Dio _dio = Dio(BaseOptions(
+  final Dio _revancedDio = Dio(BaseOptions(
     baseUrl: 'https://revanced.net',
+    connectTimeout: _timeout,
+    receiveTimeout: _timeout,
+    sendTimeout: _timeout,
+  ));
+  final Dio _gitHubDio = Dio(BaseOptions(
+    baseUrl: 'https://api.github.com',
     connectTimeout: _timeout,
     receiveTimeout: _timeout,
     sendTimeout: _timeout,
@@ -23,12 +30,19 @@ class ApiManager {
 
   Future<List<RevancedApplication>> getRevancedApplications() async {
     if (_endpoint.isEmpty) _endpoint = await _getEndpointByCPUArchitecture();
-    final response = await _dio.get(_endpoint);
+    final response = await _revancedDio.get(_endpoint);
     final items = await RevancedApplication.fromJsonList(response.data);
     items.sort((current, next) => current.isInstalled != next.isInstalled
         ? ((next.isInstalled ?? false) ? 1 : -1)
         : (current.index ?? 0).compareTo(next.index ?? 0));
     return items;
+  }
+
+  Future<MyApplication> getMyApplicationFromGitHub() async {
+    final response = await _gitHubDio.get(
+      '/repos/channdara/revanced_manager_flutter/releases/latest',
+    );
+    return MyApplication.fromJson(response.data);
   }
 
   Future<String> _getEndpointByCPUArchitecture() async {

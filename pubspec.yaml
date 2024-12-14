@@ -1,7 +1,7 @@
 name: revanced_manager_flutter
 description: "A fun project, rebuilding the original ReVanced Manager using Flutter framework."
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.1.0+2
 
 scripts:
   clean: 'flutter clean && flutter pub get'
@@ -17,12 +17,14 @@ dependencies:
     sdk: flutter
 
   dio: ^5.7.0
+  intl: ^0.20.1
   flutter_bloc: ^8.1.6
   url_launcher: ^6.3.1
   path_provider: ^2.1.5
   installed_apps: ^1.5.2
   cupertino_icons: ^1.0.8
   device_info_plus: ^11.1.1
+  package_info_plus: ^8.1.2
   shared_preferences: ^2.3.3
   cached_network_image: ^3.4.1
 

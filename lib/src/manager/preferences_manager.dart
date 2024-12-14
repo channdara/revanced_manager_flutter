@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesManager {
@@ -10,6 +11,7 @@ class PreferencesManager {
 
   static const String _darkMode = 'darkMode';
   static const String _accentColor = 'accentColor';
+  static const String _lastUpdateCheck = 'lastUpdateCheck';
 
   Future<ThemeMode> themeMode([Brightness? brightness]) async {
     final pref = await SharedPreferences.getInstance();
@@ -31,5 +33,17 @@ class PreferencesManager {
     }
     final value = pref.getInt(_accentColor);
     return value == null ? Colors.blue : Color(value);
+  }
+
+  Future<String> lastUpdateCheck([DateTime? dateTime]) async {
+    final pref = await SharedPreferences.getInstance();
+    final formater = DateFormat('MMMM dd, yyyy HH:mm a');
+    if (dateTime != null) {
+      pref.setString(_lastUpdateCheck, dateTime.toString());
+      return formater.format(dateTime);
+    }
+    final value = pref.getString(_lastUpdateCheck) ?? '';
+    final savedDateTime = DateTime.tryParse(value);
+    return savedDateTime != null ? formater.format(savedDateTime) : 'N/A';
   }
 }

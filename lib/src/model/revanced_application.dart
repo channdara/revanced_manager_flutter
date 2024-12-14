@@ -1,5 +1,7 @@
 import 'package:installed_apps/installed_apps.dart';
 
+import '../extension/string_extension.dart';
+
 class RevancedApplication {
   RevancedApplication(
     /// From API
@@ -91,14 +93,8 @@ class RevancedApplication {
   }
 
   bool get updateAvailable {
-    final installed = int.tryParse(
-          installedVersionCode?.replaceAll(RegExp(r'[^0-9]'), '') ?? '0',
-        ) ??
-        0;
-    final latest = int.tryParse(
-          latestVersionCode?.replaceAll(RegExp(r'[^0-9]'), '') ?? '0',
-        ) ??
-        0;
+    final installed = installedVersionCode.toVersionInteger();
+    final latest = latestVersionCode.toVersionInteger();
     return (isInstalled ?? false) && latest > installed;
   }
 }

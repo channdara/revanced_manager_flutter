@@ -72,7 +72,7 @@ class MainItemActionWidget extends StatelessWidget {
                   if (bloc.downloading) {
                     return LinearProgressIndicator(
                       value: bloc.progressing,
-                      minHeight: 12.0,
+                      minHeight: 8.0,
                       borderRadius: BorderRadius.circular(6.0),
                     );
                   }

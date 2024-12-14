@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
 import '../../../manager/callback_manager.dart';
-import '../settings_screen.dart';
+import '../settings_screen/settings_screen.dart';
 import 'bloc/main_bloc.dart';
 import 'bloc/main_bloc_state.dart';
 import 'widget/main_item_widget.dart';

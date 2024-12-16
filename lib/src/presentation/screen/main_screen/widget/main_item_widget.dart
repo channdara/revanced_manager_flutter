@@ -30,11 +30,11 @@ class _MainItemWidgetState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 86.0,
-                width: 86.0,
+                height: 64.0,
+                width: 64.0,
                 margin: const EdgeInsets.all(16.0),
                 child: CachedNetworkImage(
-                  imageUrl: widget.app.icon ?? '',
+                  imageUrl: widget.app.icon,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -45,7 +45,7 @@ class _MainItemWidgetState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.app.appName ?? '',
+                        widget.app.appName,
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -53,7 +53,7 @@ class _MainItemWidgetState
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        widget.app.appShortDescription ?? '',
+                        widget.app.appShortDescription,
                         style: const TextStyle(
                           fontSize: 12.0,
                           color: Colors.grey,
@@ -70,7 +70,7 @@ class _MainItemWidgetState
             child: Row(
               children: [
                 Text(
-                  'Installed: ${widget.app.installedVersionCode ?? 'N/A'}',
+                  'Installed: ${widget.app.installedVersionCode}',
                   style: const TextStyle(fontSize: 12.0),
                 ),
                 const Padding(
@@ -78,7 +78,7 @@ class _MainItemWidgetState
                   child: Icon(Icons.arrow_right_alt_rounded),
                 ),
                 Text(
-                  'Latest: ${widget.app.latestVersionCode ?? 'N/A'}',
+                  'Latest: ${widget.app.latestVersionCode}',
                   style: const TextStyle(fontSize: 12.0),
                 ),
               ],

@@ -20,21 +20,20 @@ class RevancedApplication {
   );
 
   factory RevancedApplication.fromJson(dynamic json) {
-    final packageName = json['androidPackageName'] as String?;
     return RevancedApplication(
       /// From API
-      json['appName'] as String?,
-      packageName,
-      json['latestVersionCode'] as String?,
-      json['appShortDescription'] as String?,
-      json['requireMicroG'] as bool?,
-      json['latestVersionUrl'] as String?,
-      json['icon'] as String?,
-      json['index'] as int?,
+      json['appName'] as String? ?? '',
+      json['androidPackageName'] as String? ?? '',
+      json['latestVersionCode'] as String? ?? 'N/A',
+      json['appShortDescription'] as String? ?? '',
+      json['requireMicroG'] as bool? ?? false,
+      json['latestVersionUrl'] as String? ?? '',
+      json['icon'] as String? ?? '',
+      json['index'] as int? ?? 0,
 
       /// From Local
-      null,
-      null,
+      false,
+      'N/A',
     );
   }
 
@@ -44,7 +43,7 @@ class RevancedApplication {
       final List<RevancedApplication> list = [];
       for (final json in jsonList) {
         RevancedApplication item = RevancedApplication.fromJson(json);
-        final packageName = item.androidPackageName ?? '';
+        final packageName = item.androidPackageName;
         if (packageName.isNotEmpty) {
           final appInfo = await InstalledApps.getAppInfo(packageName);
           item = item.copy(
@@ -61,18 +60,18 @@ class RevancedApplication {
   }
 
   /// From API
-  final String? appName;
-  final String? androidPackageName;
-  final String? latestVersionCode;
-  final String? appShortDescription;
-  final bool? requireMicroG;
-  final String? latestVersionUrl;
-  final String? icon;
-  final int? index;
+  final String appName;
+  final String androidPackageName;
+  final String latestVersionCode;
+  final String appShortDescription;
+  final bool requireMicroG;
+  final String latestVersionUrl;
+  final String icon;
+  final int index;
 
   /// From Local
-  final bool? isInstalled;
-  final String? installedVersionCode;
+  final bool isInstalled;
+  final String installedVersionCode;
 
   RevancedApplication copy({
     bool? isInstalled,
@@ -95,6 +94,6 @@ class RevancedApplication {
   bool get updateAvailable {
     final installed = installedVersionCode.toVersionInteger();
     final latest = latestVersionCode.toVersionInteger();
-    return (isInstalled ?? false) && latest > installed;
+    return isInstalled && latest > installed;
   }
 }

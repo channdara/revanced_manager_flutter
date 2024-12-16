@@ -33,8 +33,8 @@ class ApiManager {
     final response = await _revancedDio.get(_endpoint);
     final items = await RevancedApplication.fromJsonList(response.data);
     items.sort((current, next) => current.isInstalled != next.isInstalled
-        ? ((next.isInstalled ?? false) ? 1 : -1)
-        : (current.index ?? 0).compareTo(next.index ?? 0));
+        ? ((next.isInstalled) ? 1 : -1)
+        : current.index.compareTo(next.index));
     return items;
   }
 

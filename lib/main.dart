@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 
 import 'src/base/base_stateful.dart';
 import 'src/manager/callback_manager.dart';
@@ -7,6 +10,7 @@ import 'src/presentation/screen/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isAndroid) await FlutterDisplayMode.setHighRefreshRate();
   final themeMode = await PreferencesManager().themeMode();
   final accentColor = await PreferencesManager().accentColor();
   runApp(Application(

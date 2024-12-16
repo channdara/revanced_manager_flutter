@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../manager/application_manager.dart';
 import '../../../../model/revanced_application.dart';
+import '../../../dialog/cancel_downloading_dialog.dart';
 import '../bloc/main_bloc_state.dart';
 import '../bloc/main_item_bloc.dart';
 
@@ -15,7 +16,7 @@ class MainItemActionWidget extends StatelessWidget {
   final MainItemBloc bloc;
   final RevancedApplication app;
 
-  String get _packageName => app.androidPackageName ?? '';
+  String get _packageName => app.androidPackageName;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class MainItemActionWidget extends StatelessWidget {
               child: const Text('Update'),
             ),
           ),
-        if (true == app.isInstalled)
+        if (app.isInstalled)
           Expanded(
             child: ElevatedButton(
               onPressed: () {
@@ -45,7 +46,7 @@ class MainItemActionWidget extends StatelessWidget {
               child: const Text('Uninstall'),
             ),
           ),
-        if (true == app.isInstalled)
+        if (app.isInstalled)
           Expanded(
             child: ElevatedButton(
               onPressed: () {
@@ -57,11 +58,17 @@ class MainItemActionWidget extends StatelessWidget {
               child: const Text('Open'),
             ),
           ),
-        if (true != app.isInstalled)
+        if (!app.isInstalled)
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                bloc.startDownloadApplication(app);
+                if (bloc.downloading) {
+                  showCancelDownloadingDialog(context, app, () {
+                    bloc.cancelDownloadingApplication(app.androidPackageName);
+                  });
+                } else {
+                  bloc.startDownloadApplication(app);
+                }
               },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(),

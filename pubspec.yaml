@@ -1,7 +1,7 @@
 name: revanced_manager_flutter
 description: "A fun project, rebuilding the original ReVanced Manager using Flutter framework."
 publish_to: 'none'
-version: 1.1.0+2
+version: 1.0.0+1
 
 scripts:
   clean: 'flutter clean && flutter pub get'
@@ -28,6 +28,7 @@ dependencies:
   device_info_plus: ^11.1.1
   package_info_plus: ^8.1.2
   shared_preferences: ^2.3.3
+  flutter_displaymode: ^0.6.0
   cached_network_image: ^3.4.1
 
 dev_dependencies:

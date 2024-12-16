@@ -13,17 +13,20 @@ class DownloadManager {
   static final DownloadManager _instance = DownloadManager._();
 
   final Dio _dio = Dio();
+  final Map<String, CancelToken> _cancelTokens = {};
 
   Future<String> downloadRevancedApplication(
     RevancedApplication app,
     Function(double progress) onReceiveProgress,
   ) async {
-    final url = app.latestVersionUrl ?? '';
+    final url = app.latestVersionUrl;
     if (url.isEmpty) return '';
     final fileName = '${app.appName} ${app.latestVersionCode}.apk';
     final filePath = (await getTemporaryDirectory()).path;
     final savePath = '$filePath/$fileName';
     if (!File(savePath).existsSync()) {
+      final cancelToken = CancelToken();
+      _cancelTokens[app.androidPackageName] = cancelToken;
       await _dio.downloadUri(
         Uri.parse(url),
         savePath,
@@ -32,8 +35,14 @@ class DownloadManager {
             double.tryParse((count / total).toStringAsFixed(3)) ?? 0.0,
           );
         },
+        cancelToken: cancelToken,
       );
     }
     return savePath;
+  }
+
+  void cancelDownloading(String packageName) {
+    _cancelTokens[packageName]?.cancel();
+    _cancelTokens.remove(packageName);
   }
 }

@@ -20,8 +20,7 @@ class MainItemBloc extends BaseBloc {
           progressing = progress;
         },
       ).then((filePath) {
-        downloading = false;
-        progressing = 0.0;
+        _resetDownloading();
         safeEmit(MainStateDownload());
         if (filePath.isNotEmpty) {
           ApplicationManager().installApk(filePath);
@@ -29,12 +28,24 @@ class MainItemBloc extends BaseBloc {
       });
       Timer.periodic(const Duration(milliseconds: 250), (timer) {
         if (progressing >= 0.98) {
-          downloading = false;
-          progressing = 0.0;
+          _resetDownloading();
           timer.cancel();
         }
         safeEmit(MainStateDownload());
       });
     });
+  }
+
+  void cancelDownloadingApplication(String packageName) {
+    try {
+      DownloadManager().cancelDownloading(packageName);
+      _resetDownloading();
+      safeEmit(MainStateDownload());
+    } catch (_) {}
+  }
+
+  void _resetDownloading() {
+    downloading = false;
+    progressing = 0.0;
   }
 }

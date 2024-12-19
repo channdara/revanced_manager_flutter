@@ -72,6 +72,16 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                 ListTile(
                   onTap: () {
                     bloc.openLinkInExternalBrowser(
+                      'https://ko-fi.com/eamchanndara',
+                    );
+                  },
+                  dense: true,
+                  title: const Text('Support me on Ko-fi'),
+                  trailing: const Icon(Icons.coffee_rounded),
+                ),
+                ListTile(
+                  onTap: () {
+                    bloc.openLinkInExternalBrowser(
                       'https://github.com/channdara/revanced_manager_flutter',
                     );
                   },

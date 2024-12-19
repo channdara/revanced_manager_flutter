@@ -10,42 +10,47 @@ class MainItemBloc extends BaseBloc {
   bool downloading = false;
   double progressing = 0.0;
 
+  Timer? _timer;
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   void startDownloadApplication(RevancedApplication app) {
-    execute(requesting: () async {
+    try {
       downloading = true;
-      safeEmit(MainStateDownload());
-      DownloadManager().downloadRevancedApplication(
-        app,
-        (progress) {
-          progressing = progress;
-        },
-      ).then((filePath) {
+      safeEmit(MainStateDownloadApplication());
+      DownloadManager().downloadRevancedApplication(app, (progress) {
+        progressing = progress;
+      }).then((filePath) {
         _resetDownloading();
-        safeEmit(MainStateDownload());
-        if (filePath.isNotEmpty) {
-          ApplicationManager().installApk(filePath);
-        }
+        safeEmit(MainStateDownloadApplication());
+        if (filePath.isNotEmpty) ApplicationManager().installApk(filePath);
       });
-      Timer.periodic(const Duration(milliseconds: 250), (timer) {
-        if (progressing >= 0.98) {
-          _resetDownloading();
-          timer.cancel();
-        }
-        safeEmit(MainStateDownload());
+      _timer = Timer.periodic(const Duration(milliseconds: 250), (timer) {
+        if (progressing >= 0.98) _resetDownloading();
+        safeEmit(MainStateDownloadApplication());
       });
-    });
+    } catch (_) {
+      _resetDownloading();
+      safeEmit(MainStateDownloadApplication());
+    }
   }
 
   void cancelDownloadingApplication(String packageName) {
     try {
       DownloadManager().cancelDownloading(packageName);
       _resetDownloading();
-      safeEmit(MainStateDownload());
+      safeEmit(MainStateDownloadApplication());
     } catch (_) {}
   }
 
   void _resetDownloading() {
     downloading = false;
     progressing = 0.0;
+    _timer?.cancel();
+    _timer = null;
   }
 }

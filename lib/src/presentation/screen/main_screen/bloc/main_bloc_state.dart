@@ -7,4 +7,4 @@ class MainStateGotData extends BaseBlocState {
   final List<RevancedApplication> items;
 }
 
-class MainStateDownload extends BaseBlocState {}
+class MainStateDownloadApplication extends BaseBlocState {}

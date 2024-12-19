@@ -1,8 +1,9 @@
 import 'package:installed_apps/installed_apps.dart';
 
 import '../extension/string_extension.dart';
+import 'application_model.dart';
 
-class RevancedApplication {
+class RevancedApplication extends ApplicationModel {
   RevancedApplication(
     /// From API
     this.appName,

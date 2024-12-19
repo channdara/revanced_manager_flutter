@@ -16,15 +16,25 @@ class ApplicationManager {
 
   final MethodChannel _channel =
       const MethodChannel('com.mastertipsy.revancedmanager');
+  bool willCallInstallCompleteCallback = true;
+  bool willCallUninstallCompleteCallback = true;
 
-  Future<void> installApk(String filePath) async {
+  Future<void> installApk(
+    String filePath, {
+    bool callbackWillCall = true,
+  }) async {
     try {
+      willCallInstallCompleteCallback = callbackWillCall;
       await _channel.invokeMethod('installApk', {'filePath': filePath});
     } catch (_) {}
   }
 
-  Future<void> uninstallApk(String packageName) async {
+  Future<void> uninstallApk(
+    String packageName, {
+    bool callbackWillCall = true,
+  }) async {
     try {
+      willCallUninstallCompleteCallback = callbackWillCall;
       await _channel.invokeMethod('uninstallApk', {'packageName': packageName});
     } catch (_) {}
   }
@@ -45,9 +55,13 @@ class ApplicationManager {
     _channel.setMethodCallHandler((handler) async {
       switch (handler.method) {
         case 'installApkComplete':
-          CallbackManager().appInstallCompleteCallback?.call();
+          if (willCallInstallCompleteCallback) {
+            CallbackManager().appInstallCompleteCallback?.call();
+          }
         case 'uninstallApkComplete':
-          CallbackManager().appUninstallCompleteCallback?.call();
+          if (willCallUninstallCompleteCallback) {
+            CallbackManager().appUninstallCompleteCallback?.call();
+          }
       }
     });
   }

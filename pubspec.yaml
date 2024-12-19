@@ -1,13 +1,13 @@
 name: revanced_manager_flutter
 description: "A fun project, rebuilding the original ReVanced Manager using Flutter framework."
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.2.0+3
 
 scripts:
   clean: 'flutter clean && flutter pub get'
   build: 'flutter build apk --release'
-  open: 'open build/app/outputs/flutter-apk'
   rename: 'dart run lib/script.dart'
+  open: 'open build/app/outputs/flutter-apk'
   prod: 'rps clean && rps build && rps rename && rps open'
 
 environment:

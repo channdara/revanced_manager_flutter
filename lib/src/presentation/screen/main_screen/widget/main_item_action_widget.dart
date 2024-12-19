@@ -74,7 +74,7 @@ class MainItemActionWidget extends StatelessWidget {
                 shape: const RoundedRectangleBorder(),
               ),
               child: bloc.builder(
-                buildWhen: (p, c) => c is MainStateDownload,
+                buildWhen: (p, c) => c is MainStateDownloadApplication,
                 builder: (context, state) {
                   if (bloc.downloading) {
                     return LinearProgressIndicator(

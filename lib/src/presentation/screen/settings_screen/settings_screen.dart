@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
+import '../../../extension/int_extension.dart';
 import '../../../manager/callback_manager.dart';
 import '../../../manager/preferences_manager.dart';
+import '../../dialog/clear_cache_dialog.dart';
 import '../../dialog/preset_color_picker_dialog.dart';
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_bloc_state.dart';
@@ -26,6 +28,7 @@ class _SettingsScreenState
   void initState() {
     super.initState();
     bloc.getCurrentAppVersion();
+    bloc.getCacheDirectorySize();
   }
 
   @override
@@ -79,55 +82,24 @@ class _SettingsScreenState
               ],
             ),
             SettingsItemWidget(
-              titleLabel: 'Credit To The Owner',
+              titleLabel: 'Storage Manager',
               children: [
                 ListTile(
-                  onTap: () {
-                    bloc.openLinkInExternalBrowser(
-                      'https://ko-fi.com/rvmanager',
-                    );
-                  },
-                  title: const Text('Support ReVanced on Ko-fi'),
-                  trailing: const Icon(Icons.coffee_rounded),
-                ),
-                ListTile(
-                  onTap: () {
-                    bloc.openLinkInExternalBrowser(
-                      'https://github.com/revancedapps/revancedmanager',
-                    );
-                  },
-                  title: const Text('ReVanced Source Code'),
-                  trailing: const Icon(Icons.code_rounded),
-                ),
-                ListTile(
-                  onTap: () {
-                    bloc.openLinkInExternalBrowser('https://revanced.net');
-                  },
-                  title: const Text('ReVanced Website'),
-                  trailing: const Icon(Icons.public_rounded),
-                ),
-              ],
-            ),
-            SettingsItemWidget(
-              titleLabel: 'If You Like This Project',
-              children: [
-                ListTile(
-                  onTap: () {
-                    bloc.openLinkInExternalBrowser(
-                      'https://www.buymeacoffee.com/eamchanndara',
-                    );
-                  },
-                  title: const Text('Buy me a Coffee'),
-                  trailing: const Icon(Icons.coffee_rounded),
-                ),
-                ListTile(
-                  onTap: () {
-                    bloc.openLinkInExternalBrowser(
-                      'https://github.com/channdara/revanced_manager_flutter',
-                    );
-                  },
-                  title: const Text('This Project Source Code'),
-                  trailing: const Icon(Icons.code_rounded),
+                  title: bloc.builder(
+                    buildWhen: (p, c) => c is SettingsStateDirectoryCacheSize,
+                    builder: (context, state) {
+                      final size = bloc.totalCacheSize.toFileSize();
+                      return Text('Clear Cache $size');
+                    },
+                  ),
+                  trailing: IconButton(
+                    onPressed: () {
+                      showClearCacheDialog(context, () {
+                        bloc.clearCache();
+                      });
+                    },
+                    icon: const Icon(Icons.delete_rounded),
+                  ),
                 ),
               ],
             ),
@@ -145,20 +117,19 @@ class _SettingsScreenState
                     builder: (context, state) {
                       return ListTile(
                         title: const Text('Check for Updates'),
-                        subtitle: state is AppBlocStateLoading ||
-                                state is SettingsStateUpdateAvailable
+                        subtitle: state is AppBlocStateLoading
                             ? LinearProgressIndicator(
                                 value: bloc.progressing,
                                 borderRadius: BorderRadius.circular(4.0),
                               )
                             : Text(
-                                'Last Check: ${bloc.lastUpdateCheck}',
+                                'Last check on ${bloc.lastUpdateCheck}',
                                 style: const TextStyle(fontSize: 12.0),
                               ),
                         trailing: IconButton(
-                          onPressed: () {
-                            bloc.checkForUpdate();
-                          },
+                          onPressed: bloc.isLoading || bloc.downloading
+                              ? null
+                              : bloc.checkForUpdate,
                           icon: const Icon(Icons.refresh_rounded),
                         ),
                       );

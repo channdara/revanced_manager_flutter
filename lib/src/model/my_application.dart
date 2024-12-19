@@ -1,4 +1,6 @@
-class MyApplication {
+import 'application_model.dart';
+
+class MyApplication extends ApplicationModel {
   MyApplication(
     this.tagName,
     this.name,

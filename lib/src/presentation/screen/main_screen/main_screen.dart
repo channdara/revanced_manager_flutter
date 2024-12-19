@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
 import '../../../manager/callback_manager.dart';
+import '../about_screen.dart';
 import '../settings_screen/settings_screen.dart';
 import 'bloc/main_bloc.dart';
 import 'bloc/main_bloc_state.dart';
@@ -47,13 +48,51 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
           centerTitle: true,
           title: const Text('Revanced Manager'),
           actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const SettingsScreen()));
+            PopupMenuButton(
+              elevation: 1.0,
+              menuPadding: EdgeInsets.zero,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              position: PopupMenuPosition.under,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              padding: EdgeInsets.zero,
+              itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const SettingsScreen()));
+                    },
+                    padding: const EdgeInsets.only(left: 16.0, right: 32.0),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.settings_rounded, size: 20.0),
+                        SizedBox(width: 16.0),
+                        Text('Settings'),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const AboutScreen()));
+                    },
+                    padding: const EdgeInsets.only(left: 16.0, right: 32.0),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.info_rounded, size: 20.0),
+                        SizedBox(width: 16.0),
+                        Text('About'),
+                      ],
+                    ),
+                  ),
+                ];
               },
-              icon: const Icon(Icons.settings_rounded),
             ),
+            const SizedBox(width: 8.0),
           ],
         ),
         body: bloc.builder(

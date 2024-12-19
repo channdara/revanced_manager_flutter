@@ -6,7 +6,7 @@ import '../../model/revanced_application.dart';
 void showCancelDownloadingDialog(
   BuildContext context,
   RevancedApplication app,
-  VoidCallback onCancel,
+  VoidCallback onConfirm,
 ) {
   showDialog(
     context: context,
@@ -70,7 +70,7 @@ void showCancelDownloadingDialog(
                       Navigator.of(context).pop();
                       Future.delayed(
                         const Duration(milliseconds: 200),
-                        onCancel,
+                        onConfirm,
                       );
                     },
                     style: ElevatedButton.styleFrom(

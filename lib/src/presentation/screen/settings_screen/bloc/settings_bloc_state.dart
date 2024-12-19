@@ -5,3 +5,5 @@ class SettingsStateGotCurrentVersion extends BaseBlocState {}
 class SettingsStateNoUpdateAvailable extends BaseBlocState {}
 
 class SettingsStateDirectoryCacheSize extends BaseBlocState {}
+
+class SettingsStateDownloadingUpdate extends BaseBlocState {}

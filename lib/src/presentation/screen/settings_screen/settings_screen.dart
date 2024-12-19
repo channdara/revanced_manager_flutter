@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/base_bloc_state.dart';
@@ -106,41 +105,42 @@ class _SettingsScreenState
                 ),
               ],
             ),
-            if (kDebugMode)
-              SettingsItemWidget(
-                titleLabel: 'Update Manager',
-                trailingTitle: bloc.builder(
-                  buildWhen: (p, c) => c is SettingsStateGotCurrentVersion,
+            SettingsItemWidget(
+              titleLabel: 'Update Manager',
+              trailingTitle: bloc.builder(
+                buildWhen: (p, c) => c is SettingsStateGotCurrentVersion,
+                builder: (context, state) {
+                  return Text('v${bloc.currentVersion}');
+                },
+              ),
+              children: [
+                bloc.builder(
                   builder: (context, state) {
-                    return Text('v${bloc.currentVersion}');
+                    final showLoadingProgress = state is AppBlocStateLoading ||
+                        state is SettingsStateDownloadingUpdate;
+                    return ListTile(
+                      dense: true,
+                      title: const Text('Check for Updates'),
+                      subtitle: showLoadingProgress
+                          ? LinearProgressIndicator(
+                              value: bloc.progressing,
+                              borderRadius: BorderRadius.circular(4.0),
+                            )
+                          : Text(
+                              'Last check on ${bloc.lastUpdateCheck}',
+                              style: const TextStyle(fontSize: 10.0),
+                            ),
+                      trailing: IconButton(
+                        onPressed: bloc.isLoading || bloc.downloading
+                            ? null
+                            : bloc.checkForUpdate,
+                        icon: const Icon(Icons.refresh_rounded),
+                      ),
+                    );
                   },
                 ),
-                children: [
-                  bloc.builder(
-                    builder: (context, state) {
-                      return ListTile(
-                        dense: true,
-                        title: const Text('Check for Updates'),
-                        subtitle: state is AppBlocStateLoading
-                            ? LinearProgressIndicator(
-                                value: bloc.progressing,
-                                borderRadius: BorderRadius.circular(4.0),
-                              )
-                            : Text(
-                                'Last check on ${bloc.lastUpdateCheck}',
-                                style: const TextStyle(fontSize: 12.0),
-                              ),
-                        trailing: IconButton(
-                          onPressed: bloc.isLoading || bloc.downloading
-                              ? null
-                              : bloc.checkForUpdate,
-                          icon: const Icon(Icons.refresh_rounded),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+              ],
+            ),
           ],
         ),
       ),

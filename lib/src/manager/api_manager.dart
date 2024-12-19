@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../model/my_application.dart';
 import '../model/revanced_application.dart';
@@ -12,6 +14,13 @@ class ApiManager {
   static final ApiManager _instance = ApiManager._();
 
   static const Duration _timeout = Duration(seconds: 20);
+  static final _dioLoggerInterceptor = PrettyDioLogger(
+    requestHeader: true,
+    requestBody: true,
+    compact: false,
+    maxWidth: 180,
+    enabled: kDebugMode,
+  );
 
   String _endpoint = '';
 
@@ -20,13 +29,15 @@ class ApiManager {
     connectTimeout: _timeout,
     receiveTimeout: _timeout,
     sendTimeout: _timeout,
-  ));
+  ))
+    ..interceptors.add(_dioLoggerInterceptor);
   final Dio _gitHubDio = Dio(BaseOptions(
     baseUrl: 'https://api.github.com',
     connectTimeout: _timeout,
     receiveTimeout: _timeout,
     sendTimeout: _timeout,
-  ));
+  ))
+    ..interceptors.add(_dioLoggerInterceptor);
 
   Future<List<RevancedApplication>> getRevancedApplications() async {
     if (_endpoint.isEmpty) _endpoint = await _getEndpointByCPUArchitecture();

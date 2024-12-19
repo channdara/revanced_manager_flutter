@@ -83,6 +83,7 @@ class SettingsBloc extends BaseBloc {
         _downloadLatestAppVersion(appRelease);
       } else {
         emitLoaded();
+        _resetDownloading();
         safeEmit(SettingsStateNoUpdateAvailable());
       }
     }, onError: (_) {
@@ -98,8 +99,9 @@ class SettingsBloc extends BaseBloc {
       DownloadManager().downloadMyApplication(app, (progress) {
         progressing = progress;
       }).then((filePath) {
-        _resetDownloading();
         emitLoaded();
+        _resetDownloading();
+        getCacheDirectorySize();
         if (filePath.isNotEmpty) {
           ApplicationManager().installApk(
             filePath,
@@ -109,11 +111,12 @@ class SettingsBloc extends BaseBloc {
       });
       _timer = Timer.periodic(const Duration(milliseconds: 250), (timer) {
         if ((progressing ?? 0.0) >= 0.98) _resetDownloading();
-        emitLoading();
+        safeEmit(SettingsStateDownloadingUpdate());
       });
     } catch (_) {
-      _resetDownloading();
       emitLoaded();
+      _resetDownloading();
+      safeEmit(SettingsStateNoUpdateAvailable());
     }
   }
 

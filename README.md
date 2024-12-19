@@ -11,3 +11,17 @@ enhanced it to provide you with a seamless experience in managing and updating y
 
 * ReVanced website: https://revanced.net
 * ReVanced Manager: https://github.com/revancedapps/revancedmanager
+
+# Update App UI
+
+### Home Screen
+
+|<img src="assets/readme/1-light.png" alt="drawing" width="256"/> | <img src="assets/readme/1-dark.png" alt="drawing" width="256"/>|
+
+### Settings Screen
+
+|<img src="assets/readme/2-light.png" alt="drawing" width="256"/> | <img src="assets/readme/2-dark.png" alt="drawing" width="256"/>|
+
+### AboutUS Screen
+
+|<img src="assets/readme/3-light.png" alt="drawing" width="256"/> | <img src="assets/readme/3-dark.png" alt="drawing" width="256"/>|

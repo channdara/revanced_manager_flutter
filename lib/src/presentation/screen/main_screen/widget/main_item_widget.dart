@@ -69,17 +69,21 @@ class _MainItemWidgetState
             padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
             child: Row(
               children: [
-                Text(
-                  'Installed: ${widget.app.installedVersionCode}',
-                  style: const TextStyle(fontSize: 12.0),
+                Flexible(
+                  child: Text(
+                    'Installed: ${widget.app.installedVersionCode}',
+                    style: const TextStyle(fontSize: 12.0),
+                  ),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0),
                   child: Icon(Icons.arrow_right_alt_rounded),
                 ),
-                Text(
-                  'Latest: ${widget.app.latestVersionCode}',
-                  style: const TextStyle(fontSize: 12.0),
+                Flexible(
+                  child: Text(
+                    'Latest: ${widget.app.latestVersionCode}',
+                    style: const TextStyle(fontSize: 12.0),
+                  ),
                 ),
               ],
             ),

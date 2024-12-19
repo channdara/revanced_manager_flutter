@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
 import '../../../manager/callback_manager.dart';
+import '../../../model/mock_data.dart';
 import '../about_screen.dart';
 import '../settings_screen/settings_screen.dart';
 import 'bloc/main_bloc.dart';
@@ -97,13 +99,12 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
         ),
         body: bloc.builder(
           builder: (context, state) {
-            if (state is AppBlocStateLoading) {
-              return const Center(
-                child: CircularProgressIndicator.adaptive(strokeWidth: 3.0),
-              );
-            }
-            if (state is MainStateGotData) {
-              return RefreshIndicator(
+            final items = state is MainStateGotData
+                ? state.items
+                : MockData.mockApplications();
+            return Skeletonizer(
+              enabled: state is AppBlocStateLoading,
+              child: RefreshIndicator(
                 key: bloc.refreshIndicatorKey,
                 onRefresh: bloc.getRevancedApplications,
                 child: SingleChildScrollView(
@@ -111,14 +112,13 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
                   padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
-                    children: state.items.map((app) {
+                    children: items.map((app) {
                       return MainItemWidget(app: app);
                     }).toList(),
                   ),
                 ),
-              );
-            }
-            return const SizedBox();
+              ),
+            );
           },
         ),
       ),

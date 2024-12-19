@@ -32,6 +32,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                       'https://ko-fi.com/rvmanager',
                     );
                   },
+                  dense: true,
                   title: const Text('Support ReVanced on Ko-fi'),
                   trailing: const Icon(Icons.coffee_rounded),
                 ),
@@ -41,6 +42,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                       'https://github.com/revancedapps/revancedmanager',
                     );
                   },
+                  dense: true,
                   title: const Text('ReVanced Source Code'),
                   trailing: const Icon(Icons.code_rounded),
                 ),
@@ -48,6 +50,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                   onTap: () {
                     bloc.openLinkInExternalBrowser('https://revanced.net');
                   },
+                  dense: true,
                   title: const Text('ReVanced Website'),
                   trailing: const Icon(Icons.public_rounded),
                 ),
@@ -62,6 +65,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                       'https://www.buymeacoffee.com/eamchanndara',
                     );
                   },
+                  dense: true,
                   title: const Text('Buy me a Coffee'),
                   trailing: const Icon(Icons.coffee_rounded),
                 ),
@@ -71,6 +75,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                       'https://github.com/channdara/revanced_manager_flutter',
                     );
                   },
+                  dense: true,
                   title: const Text('This Project Source Code'),
                   trailing: const Icon(Icons.code_rounded),
                 ),

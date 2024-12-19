@@ -23,6 +23,7 @@ class SettingsItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
+            dense: true,
             title: Row(
               children: [
                 Expanded(

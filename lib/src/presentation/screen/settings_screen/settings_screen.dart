@@ -43,9 +43,10 @@ class _SettingsScreenState
               titleLabel: 'App Theme',
               children: [
                 ListTile(
+                  dense: true,
                   title: const Text('Enable Dark Mode'),
                   trailing: Transform.scale(
-                    scale: 0.85,
+                    scale: 0.7,
                     child: Switch(
                       value: Theme.of(context).brightness == Brightness.dark,
                       onChanged: (value) {
@@ -60,6 +61,7 @@ class _SettingsScreenState
                   ),
                 ),
                 ListTile(
+                  dense: true,
                   title: const Text('Accent Color'),
                   trailing: IconButton(
                     onPressed: () {
@@ -85,6 +87,7 @@ class _SettingsScreenState
               titleLabel: 'Storage Manager',
               children: [
                 ListTile(
+                  dense: true,
                   title: bloc.builder(
                     buildWhen: (p, c) => c is SettingsStateDirectoryCacheSize,
                     builder: (context, state) {
@@ -116,6 +119,7 @@ class _SettingsScreenState
                   bloc.builder(
                     builder: (context, state) {
                       return ListTile(
+                        dense: true,
                         title: const Text('Check for Updates'),
                         subtitle: state is AppBlocStateLoading
                             ? LinearProgressIndicator(

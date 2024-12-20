@@ -8,9 +8,9 @@ Future<void> main() async {
     if (file.existsSync()) {
       final content = await File('pubspec.yaml').readAsString();
       final yaml = await loadYaml(content);
-      final String version = yaml['version'].toString();
-      final String newName = 'revanced_manager_$version.apk';
-      final String newPath = '${file.parent.path}/$newName';
+      final version = yaml['version'].toString();
+      final newName = 'revanced_manager_$version.apk';
+      final newPath = '${file.parent.path}/$newName';
       await file.copy(newPath);
     }
   } catch (_) {}

@@ -18,6 +18,16 @@ class MainItemActionWidget extends StatelessWidget {
 
   String get _packageName => app.androidPackageName;
 
+  void _downloadOrUpdate(BuildContext context) {
+    if (bloc.downloading) {
+      showCancelDownloadingDialog(context, app, () {
+        bloc.cancelDownloadingApplication(app.androidPackageName);
+      });
+    } else {
+      bloc.startDownloadApplication(app);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -25,7 +35,9 @@ class MainItemActionWidget extends StatelessWidget {
         if (app.updateAvailable)
           Expanded(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _downloadOrUpdate(context);
+              },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.green,
                 shape: const RoundedRectangleBorder(),
@@ -62,13 +74,7 @@ class MainItemActionWidget extends StatelessWidget {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                if (bloc.downloading) {
-                  showCancelDownloadingDialog(context, app, () {
-                    bloc.cancelDownloadingApplication(app.androidPackageName);
-                  });
-                } else {
-                  bloc.startDownloadApplication(app);
-                }
+                _downloadOrUpdate(context);
               },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(),

@@ -49,11 +49,18 @@ class ApiManager {
     return items;
   }
 
-  Future<MyApplication> getMyApplicationFromGitHub() async {
+  Future<MyApplication> getMyAppLatestRelease() async {
     final response = await _gitHubDio.get(
       '/repos/channdara/revanced_manager_flutter/releases/latest',
     );
     return MyApplication.fromJson(response.data);
+  }
+
+  Future<List<MyApplication>> getMyAppAllReleases() async {
+    final response = await _gitHubDio.get(
+      '/repos/channdara/revanced_manager_flutter/releases',
+    );
+    return MyApplication.fromJsonList(response.data);
   }
 
   Future<String> _getEndpointByCPUArchitecture() async {

@@ -1,3 +1,4 @@
+import 'my_application.dart';
 import 'revanced_application.dart';
 
 class MockData {
@@ -14,6 +15,18 @@ class MockData {
         index,
         false,
         'installedVersionCode',
+      );
+    });
+  }
+
+  static List<MyApplication> mockMyApplications() {
+    return List.generate(5, (index) {
+      return MyApplication(
+        'tagName',
+        'name',
+        'publishedAt',
+        'downloadUrl',
+        'body\nbody\n',
       );
     });
   }

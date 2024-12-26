@@ -75,7 +75,7 @@ class SettingsBloc extends BaseBloc {
   void _fetchGitHubLatestRelease() {
     execute(requesting: () async {
       emitLoading();
-      final appRelease = await ApiManager().getMyApplicationFromGitHub();
+      final appRelease = await ApiManager().getMyAppLatestRelease();
       final versionFromGitHub = appRelease.tagName.toVersionInteger();
       final packageVersion = currentVersion.toVersionInteger();
       final updateAvailable = versionFromGitHub > packageVersion;

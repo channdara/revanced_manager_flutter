@@ -35,6 +35,7 @@ class _SettingsScreenState
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 128.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

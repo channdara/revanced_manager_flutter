@@ -20,6 +20,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
     return Scaffold(
       appBar: AppBar(title: const Text('About Us')),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 128.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

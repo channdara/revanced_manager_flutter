@@ -7,9 +7,11 @@ import '../../../base/base_stateful_bloc.dart';
 import '../../../manager/callback_manager.dart';
 import '../../../model/mock_data.dart';
 import '../about_screen.dart';
+import '../changelog_screen/changelog_screen.dart';
 import '../settings_screen/settings_screen.dart';
 import 'bloc/main_bloc.dart';
 import 'bloc/main_bloc_state.dart';
+import 'widget/main_error_widget.dart';
 import 'widget/main_item_widget.dart';
 
 class MainScreen extends StatefulWidget {
@@ -79,6 +81,21 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
                   PopupMenuItem(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const ChangelogScreen()));
+                    },
+                    padding: const EdgeInsets.only(left: 16.0, right: 32.0),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.notes_rounded, size: 20.0),
+                        SizedBox(width: 16.0),
+                        Text('Changelog'),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
                           builder: (_) => const AboutScreen()));
                     },
                     padding: const EdgeInsets.only(left: 16.0, right: 32.0),
@@ -111,11 +128,13 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
                   controller: bloc.scrollController,
                   padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
                   physics: const AlwaysScrollableScrollPhysics(),
-                  child: Column(
-                    children: items.map((app) {
-                      return MainItemWidget(app: app);
-                    }).toList(),
-                  ),
+                  child: state is AppBlocStateError
+                      ? const MainErrorWidget()
+                      : Column(
+                          children: items.map((app) {
+                            return MainItemWidget(app: app);
+                          }).toList(),
+                        ),
                 ),
               ),
             );

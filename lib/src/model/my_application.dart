@@ -6,6 +6,7 @@ class MyApplication extends ApplicationModel {
     this.name,
     this.publishedAt,
     this.downloadUrl,
+    this.body,
   );
 
   factory MyApplication.fromJson(dynamic json) {
@@ -18,11 +19,23 @@ class MyApplication extends ApplicationModel {
       json['name'] as String? ?? '',
       json['published_at'] as String? ?? '',
       downloadUrl,
+      json['body'] as String? ?? '',
     );
+  }
+
+  static List<MyApplication> fromJsonList(dynamic data) {
+    try {
+      return (data as List<dynamic>)
+          .map((json) => MyApplication.fromJson(json))
+          .toList();
+    } catch (_) {
+      return [];
+    }
   }
 
   final String tagName;
   final String name;
   final String publishedAt;
   final String downloadUrl;
+  final String body;
 }

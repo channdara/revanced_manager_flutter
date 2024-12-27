@@ -6,12 +6,10 @@ import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
 import '../../../manager/callback_manager.dart';
 import '../../../model/mock_data.dart';
-import '../about_screen.dart';
-import '../changelog_screen/changelog_screen.dart';
-import '../settings_screen/settings_screen.dart';
+import '../../widget/app_error_widget.dart';
 import 'bloc/main_bloc.dart';
 import 'bloc/main_bloc_state.dart';
-import 'widget/main_error_widget.dart';
+import 'widget/main_action_menu_widget.dart';
 import 'widget/main_item_widget.dart';
 
 class MainScreen extends StatefulWidget {
@@ -35,7 +33,7 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
   @override
   void initStatePostFrameCallback() {
     super.initStatePostFrameCallback();
-    bloc.getRevancedApplications(false);
+    bloc.getRevancedApplications();
   }
 
   @override
@@ -52,69 +50,27 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
           centerTitle: true,
           title: const Text('Revanced Manager'),
           actions: [
-            PopupMenuButton(
-              elevation: 1.0,
-              menuPadding: EdgeInsets.zero,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              position: PopupMenuPosition.under,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              padding: EdgeInsets.zero,
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => const SettingsScreen()));
-                    },
-                    padding: const EdgeInsets.only(left: 16.0, right: 32.0),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.settings_rounded, size: 20.0),
-                        SizedBox(width: 16.0),
-                        Text('Settings'),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => const ChangelogScreen()));
-                    },
-                    padding: const EdgeInsets.only(left: 16.0, right: 32.0),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.notes_rounded, size: 20.0),
-                        SizedBox(width: 16.0),
-                        Text('Changelog'),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => const AboutScreen()));
-                    },
-                    padding: const EdgeInsets.only(left: 16.0, right: 32.0),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.info_rounded, size: 20.0),
-                        SizedBox(width: 16.0),
-                        Text('About'),
-                      ],
-                    ),
-                  ),
-                ];
+            bloc.builder(
+              buildWhen: (p, c) => c is MainStateCheckUpdate,
+              builder: (context, state) {
+                final updateAvailable =
+                    state is MainStateCheckUpdate && state.updateAvailable;
+                return Badge(
+                  isLabelVisible: updateAvailable,
+                  smallSize: 8.0,
+                  backgroundColor: Colors.orange,
+                  child: MainActionMenuWidget(updateAvailable: updateAvailable),
+                );
               },
             ),
-            const SizedBox(width: 8.0),
+            const SizedBox(width: 12.0),
           ],
         ),
         body: bloc.builder(
+          buildWhen: (p, c) =>
+              c is AppBlocStateLoading ||
+              c is AppBlocStateError ||
+              c is MainStateGotData,
           builder: (context, state) {
             final items = state is MainStateGotData
                 ? state.items
@@ -123,13 +79,13 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
               enabled: state is AppBlocStateLoading,
               child: RefreshIndicator(
                 key: bloc.refreshIndicatorKey,
-                onRefresh: bloc.getRevancedApplications,
+                onRefresh: bloc.refreshRevancedApplications,
                 child: SingleChildScrollView(
                   controller: bloc.scrollController,
                   padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: state is AppBlocStateError
-                      ? const MainErrorWidget()
+                      ? const AppErrorWidget()
                       : Column(
                           children: items.map((app) {
                             return MainItemWidget(app: app);

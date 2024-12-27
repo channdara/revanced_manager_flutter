@@ -4,7 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
 import '../../../model/mock_data.dart';
-import '../main_screen/widget/main_error_widget.dart';
+import '../../widget/app_error_widget.dart';
 import 'bloc/changelog_bloc.dart';
 import 'bloc/changelog_bloc_state.dart';
 import 'widget/changelog_item_widget.dart';
@@ -39,7 +39,7 @@ class _ChangelogScreenState
           return Skeletonizer(
             enabled: state is AppBlocStateLoading,
             child: state is AppBlocStateError
-                ? const MainErrorWidget(padding: EdgeInsets.all(16.0))
+                ? const AppErrorWidget(padding: EdgeInsets.all(16.0))
                 : ListView.builder(
                     padding: const EdgeInsets.only(bottom: 128.0),
                     itemCount: items.length,

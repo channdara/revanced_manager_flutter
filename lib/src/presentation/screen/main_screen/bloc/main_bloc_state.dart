@@ -8,3 +8,9 @@ class MainStateGotData extends BaseBlocState {
 }
 
 class MainStateDownloadApplication extends BaseBlocState {}
+
+class MainStateCheckUpdate extends BaseBlocState {
+  MainStateCheckUpdate(this.updateAvailable);
+
+  final bool updateAvailable;
+}

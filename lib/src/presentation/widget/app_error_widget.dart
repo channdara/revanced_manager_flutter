@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MainErrorWidget extends StatelessWidget {
-  const MainErrorWidget({super.key, this.padding});
+class AppErrorWidget extends StatelessWidget {
+  const AppErrorWidget({super.key, this.padding});
 
   final EdgeInsetsGeometry? padding;
 

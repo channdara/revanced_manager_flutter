@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../extension/string_extension.dart';
+import '../model/check_update.dart';
 import '../model/my_application.dart';
 import '../model/revanced_application.dart';
 import 'application_manager.dart';
@@ -61,6 +64,20 @@ class ApiManager {
       '/repos/channdara/revanced_manager_flutter/releases',
     );
     return MyApplication.fromJsonList(response.data);
+  }
+
+  Future<CheckUpdate> checkUpdateForManagerApp() async {
+    try {
+      final appRelease = await getMyAppLatestRelease();
+      final package = await PackageInfo.fromPlatform();
+      final versionFromGitHub = appRelease.tagName.toVersionInteger();
+      final currentVersion = '${package.version}+${package.buildNumber}';
+      final packageVersion = currentVersion.toVersionInteger();
+      final updateAvailable = versionFromGitHub > packageVersion;
+      return CheckUpdate(updateAvailable, appRelease);
+    } catch (_) {
+      return CheckUpdate(false, null);
+    }
   }
 
   Future<String> _getEndpointByCPUArchitecture() async {

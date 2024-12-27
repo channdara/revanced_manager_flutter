@@ -24,12 +24,26 @@ class MainBloc extends BaseBloc {
     refreshIndicatorKey.currentState?.show();
   }
 
-  Future<void> getRevancedApplications([bool isRefresh = true]) async {
-    await execute(requesting: () async {
-      if (!isRefresh) emitLoading();
+  void getRevancedApplications() {
+    execute(requesting: () async {
+      emitLoading();
       final items = await ApiManager().getRevancedApplications();
       emitLoaded();
       safeEmit(MainStateGotData(items));
+      _fetchGitHubLatestRelease();
+    });
+  }
+
+  Future<void> refreshRevancedApplications() async {
+    await execute(requesting: () async {
+      final items = await ApiManager().getRevancedApplications();
+      safeEmit(MainStateGotData(items));
+    });
+  }
+
+  void _fetchGitHubLatestRelease() {
+    ApiManager().checkUpdateForManagerApp().then((data) {
+      safeEmit(MainStateCheckUpdate(data.updateAvailable));
     });
   }
 }

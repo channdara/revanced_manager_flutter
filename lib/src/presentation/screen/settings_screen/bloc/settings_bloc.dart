@@ -5,7 +5,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../base/base_bloc.dart';
-import '../../../../extension/string_extension.dart';
 import '../../../../manager/api_manager.dart';
 import '../../../../manager/application_manager.dart';
 import '../../../../manager/download_manager.dart';
@@ -69,18 +68,15 @@ class SettingsBloc extends BaseBloc {
   Future<void> checkForUpdate() async {
     final now = DateTime.now();
     lastUpdateCheck = await PreferencesManager().lastUpdateCheck(now);
-    _fetchGitHubLatestRelease();
+    _checkUpdateForManagerApp();
   }
 
-  void _fetchGitHubLatestRelease() {
+  void _checkUpdateForManagerApp() {
     execute(requesting: () async {
       emitLoading();
-      final appRelease = await ApiManager().getMyAppLatestRelease();
-      final versionFromGitHub = appRelease.tagName.toVersionInteger();
-      final packageVersion = currentVersion.toVersionInteger();
-      final updateAvailable = versionFromGitHub > packageVersion;
-      if (updateAvailable) {
-        _downloadLatestAppVersion(appRelease);
+      final response = await ApiManager().checkUpdateForManagerApp();
+      if (response.updateAvailable && response.appLatest != null) {
+        _downloadLatestAppVersion(response.appLatest!);
       } else {
         emitLoaded();
         _resetDownloading();

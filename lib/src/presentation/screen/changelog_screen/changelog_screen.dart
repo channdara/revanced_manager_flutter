@@ -39,7 +39,7 @@ class _ChangelogScreenState
           return Skeletonizer(
             enabled: state is AppBlocStateLoading,
             child: state is AppBlocStateError
-                ? const MainErrorWidget()
+                ? const MainErrorWidget(padding: EdgeInsets.all(16.0))
                 : ListView.builder(
                     padding: const EdgeInsets.only(bottom: 128.0),
                     itemCount: items.length,

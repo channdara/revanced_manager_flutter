@@ -26,7 +26,7 @@ class MockData {
         'name',
         'publishedAt',
         'downloadUrl',
-        'body\nbody\n',
+        'body\nbody\nbody',
       );
     });
   }

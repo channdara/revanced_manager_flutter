@@ -17,9 +17,7 @@ class ChangelogItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0.0,
       margin: const EdgeInsets.only(bottom: 16.0),
-      shape: const RoundedRectangleBorder(),
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(

@@ -41,7 +41,7 @@ class _ChangelogScreenState
             child: state is AppBlocStateError
                 ? const AppErrorWidget(padding: EdgeInsets.all(16.0))
                 : ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 128.0),
+                    padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       final item = items[index];

@@ -47,7 +47,7 @@ class _SettingsScreenState
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 128.0),
+        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -58,7 +58,7 @@ class _SettingsScreenState
                   dense: true,
                   title: const Text('Enable Dark Mode'),
                   trailing: Transform.scale(
-                    scale: 0.7,
+                    scale: 0.8,
                     child: Switch(
                       value: Theme.of(context).brightness == Brightness.dark,
                       onChanged: (value) {

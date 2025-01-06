@@ -15,9 +15,7 @@ class SettingsItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0.0,
       margin: const EdgeInsets.only(bottom: 16.0),
-      shape: const RoundedRectangleBorder(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

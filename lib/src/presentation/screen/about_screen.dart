@@ -20,13 +20,19 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
     return Scaffold(
       appBar: AppBar(title: const Text('About Us')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 128.0),
+        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SettingsItemWidget(
               titleLabel: 'Credit To The Owner',
               children: [
+                const ListTile(
+                  dense: true,
+                  subtitle: Text(
+                    "Welcome to ReVanced Manager, your go-to tool for managing ReVanced apps and other modded APKs. Developed by the revanced.net team, ReVanced Manager is inspired by the old popular app named Vanced Manager. We've taken the concept and enhanced it to provide you with a seamless experience in managing and updating your favorite apps.",
+                  ),
+                ),
                 ListTile(
                   onTap: () {
                     bloc.openLinkInExternalBrowser(
@@ -60,6 +66,12 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
             SettingsItemWidget(
               titleLabel: 'If You Like This Project',
               children: [
+                const ListTile(
+                  dense: true,
+                  subtitle: Text(
+                    'A fun project, rebuilding the original ReVanced Manager using Flutter framework. Please refer to the original website or applications by the sources above.',
+                  ),
+                ),
                 ListTile(
                   onTap: () {
                     bloc.openLinkInExternalBrowser(

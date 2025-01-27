@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../base/base_stateful_bloc.dart';
+import '../../extension/context_extension.dart';
 import 'settings_screen/bloc/settings_bloc.dart';
 import 'settings_screen/widget/settings_item_widget.dart';
 
@@ -20,7 +21,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
     return Scaffold(
       appBar: AppBar(title: const Text('About Us')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
+        padding: context.defaultListPadding(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

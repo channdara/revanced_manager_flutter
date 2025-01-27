@@ -42,6 +42,7 @@ abstract class BaseBloc extends BlocBase<BaseBlocState> {
       await requesting();
     } catch (exception) {
       if (onError != null) {
+        emitLoaded();
         onError(exception);
       } else {
         emitLoaded();

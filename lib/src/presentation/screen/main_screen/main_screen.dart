@@ -4,6 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
+import '../../../extension/context_extension.dart';
 import '../../../manager/callback_manager.dart';
 import '../../../model/mock_data.dart';
 import '../../widget/app_error_widget.dart';
@@ -75,22 +76,22 @@ class _MainScreenState extends BaseStatefulBloc<MainScreen, MainBloc> {
             final items = state is MainStateGotData
                 ? state.items
                 : MockData.mockApplications();
+            final itemCount = state is AppBlocStateError ? 1 : items.length;
+            final showError = state is AppBlocStateError && itemCount == 1;
             return Skeletonizer(
               enabled: state is AppBlocStateLoading,
               child: RefreshIndicator(
                 key: bloc.refreshIndicatorKey,
                 onRefresh: bloc.refreshRevancedApplications,
-                child: SingleChildScrollView(
+                child: ListView.builder(
                   controller: bloc.scrollController,
-                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
+                  padding: context.defaultListPadding(),
                   physics: const AlwaysScrollableScrollPhysics(),
-                  child: state is AppBlocStateError
-                      ? const AppErrorWidget()
-                      : Column(
-                          children: items.map((app) {
-                            return MainItemWidget(app: app);
-                          }).toList(),
-                        ),
+                  itemCount: itemCount,
+                  itemBuilder: (context, index) {
+                    if (showError) return const AppErrorWidget();
+                    return MainItemWidget(bloc: bloc, app: items[index]);
+                  },
                 ),
               ),
             );

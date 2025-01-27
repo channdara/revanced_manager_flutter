@@ -3,6 +3,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
+import '../../../extension/context_extension.dart';
 import '../../../model/mock_data.dart';
 import '../../widget/app_error_widget.dart';
 import 'bloc/changelog_bloc.dart';
@@ -41,7 +42,7 @@ class _ChangelogScreenState
             child: state is AppBlocStateError
                 ? const AppErrorWidget(padding: EdgeInsets.all(16.0))
                 : ListView.builder(
-                    padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
+                    padding: context.defaultListPadding(),
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       final item = items[index];

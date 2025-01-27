@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
+import '../../../extension/context_extension.dart';
 import '../../../extension/int_extension.dart';
 import '../../../manager/callback_manager.dart';
 import '../../../manager/preferences_manager.dart';
@@ -47,7 +48,7 @@ class _SettingsScreenState
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
+        padding: context.defaultListPadding(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

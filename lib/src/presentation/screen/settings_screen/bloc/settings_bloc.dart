@@ -85,7 +85,6 @@ class SettingsBloc extends BaseBloc {
         safeEmit(SettingsStateNoUpdateAvailable());
       }
     }, onError: (_) {
-      emitLoaded();
       _resetDownloading();
       safeEmit(SettingsStateNoUpdateAvailable());
     });

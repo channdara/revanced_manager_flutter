@@ -1,24 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../base/base_stateful_bloc.dart';
 import '../../../../model/revanced_application.dart';
-import '../bloc/main_item_bloc.dart';
+import '../bloc/main_bloc.dart';
 import 'main_item_action_widget.dart';
 
-class MainItemWidget extends StatefulWidget {
-  const MainItemWidget({super.key, required this.app});
+class MainItemWidget extends StatelessWidget {
+  const MainItemWidget({
+    super.key,
+    required this.bloc,
+    required this.app,
+  });
 
+  final MainBloc bloc;
   final RevancedApplication app;
-
-  @override
-  State<MainItemWidget> createState() => _MainItemWidgetState();
-}
-
-class _MainItemWidgetState
-    extends BaseStatefulBloc<MainItemWidget, MainItemBloc> {
-  @override
-  MainItemBloc bloc = MainItemBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +29,7 @@ class _MainItemWidgetState
                 width: 64.0,
                 margin: const EdgeInsets.all(16.0),
                 child: CachedNetworkImage(
-                  imageUrl: widget.app.icon,
+                  imageUrl: app.icon,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -45,7 +40,7 @@ class _MainItemWidgetState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.app.appName,
+                        app.appName,
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -53,7 +48,7 @@ class _MainItemWidgetState
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        widget.app.appShortDescription,
+                        app.appShortDescription,
                         style: const TextStyle(
                           fontSize: 12.0,
                           color: Colors.grey,
@@ -71,7 +66,7 @@ class _MainItemWidgetState
               children: [
                 Flexible(
                   child: Text(
-                    'Installed: ${widget.app.installedVersionCode}',
+                    'Installed: ${app.installedVersionCode}',
                     style: const TextStyle(fontSize: 12.0),
                   ),
                 ),
@@ -81,7 +76,7 @@ class _MainItemWidgetState
                 ),
                 Flexible(
                   child: Text(
-                    'Latest: ${widget.app.latestVersionCode}',
+                    'Latest: ${app.latestVersionCode}',
                     style: const TextStyle(fontSize: 12.0),
                   ),
                 ),
@@ -90,7 +85,7 @@ class _MainItemWidgetState
           ),
           MainItemActionWidget(
             bloc: bloc,
-            app: widget.app,
+            app: app,
           ),
         ],
       ),

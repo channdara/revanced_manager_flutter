@@ -5,16 +5,16 @@ class MockData {
   static List<RevancedApplication> mockApplications() {
     return List.generate(5, (index) {
       return RevancedApplication(
-        'appName',
-        'androidPackageName',
-        'latestVersionCode',
-        'appShortDescription\nappShortDescription\nappShortDescription',
+        'App Name',
+        'Android Package Name',
+        'Latest Version Code',
+        'App Short Description\nApp Short Description\nApp Short Description',
         false,
-        'latestVersionUrl',
-        'icon',
+        'Latest Version Url',
+        'Icon',
         index,
         false,
-        'installedVersionCode',
+        'Installed Version Code',
       );
     });
   }
@@ -22,11 +22,11 @@ class MockData {
   static List<MyApplication> mockMyApplications() {
     return List.generate(5, (index) {
       return MyApplication(
-        'tagName',
-        'name',
-        'publishedAt',
-        'downloadUrl',
-        'body\nbody\nbody',
+        'Tag Name',
+        'Name',
+        'Published At',
+        'Download Url',
+        'Body\nBody\nBody',
       );
     });
   }

@@ -49,7 +49,7 @@ void showCancelDownloadingDialog(
               subtitle: Text(
                 app.appShortDescription,
                 style: const TextStyle(fontSize: 10.0),
-                maxLines: 1,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -77,7 +77,7 @@ void showCancelDownloadingDialog(
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
                     ),
-                    child: const Text('Cancel Downloading'),
+                    child: const Text('Cancel Now'),
                   ),
                 ],
               ),

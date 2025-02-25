@@ -87,7 +87,7 @@ class MainItemActionWidget extends StatelessWidget {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                ApplicationManager().openApp(_packageName);
+                ApplicationManager().launchApp(_packageName);
               },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(),

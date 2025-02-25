@@ -18,7 +18,6 @@ class SettingsBloc extends BaseBloc {
   bool downloading = false;
   double? progressing;
   int totalCacheSize = 0;
-  String directoryPath = '';
 
   Timer? _timer;
 
@@ -37,7 +36,6 @@ class SettingsBloc extends BaseBloc {
     try {
       totalCacheSize = 0;
       final directory = await getTemporaryDirectory();
-      directoryPath = directory.path;
       directory.listSync().forEach((file) {
         totalCacheSize += file.statSync().size;
       });

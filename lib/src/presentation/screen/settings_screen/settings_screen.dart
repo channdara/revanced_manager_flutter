@@ -108,15 +108,6 @@ class _SettingsScreenState
                       return Text('Clear Cache $size');
                     },
                   ),
-                  subtitle: bloc.builder(
-                    buildWhen: (p, c) => c is SettingsStateDirectoryCacheSize,
-                    builder: (context, state) {
-                      return Text(
-                        bloc.directoryPath,
-                        style: const TextStyle(fontSize: 10.0),
-                      );
-                    },
-                  ),
                   trailing: IconButton(
                     onPressed: () {
                       showClearCacheDialog(context, () {

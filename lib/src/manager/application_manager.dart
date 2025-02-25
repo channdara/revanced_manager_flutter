@@ -1,7 +1,7 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
-import 'package:installed_apps/installed_apps.dart';
 
+import '../model/app_info.dart';
 import 'callback_manager.dart';
 
 class ApplicationManager {
@@ -25,7 +25,10 @@ class ApplicationManager {
   }) async {
     try {
       _willCallInstallCompleteCallback = callbackWillCall;
-      await _channel.invokeMethod('installApk', {'filePath': filePath});
+      await _channel.invokeMethod(
+        'installApk',
+        {'filePath': filePath},
+      );
     } catch (_) {}
   }
 
@@ -35,14 +38,32 @@ class ApplicationManager {
   }) async {
     try {
       _willCallUninstallCompleteCallback = callbackWillCall;
-      await _channel.invokeMethod('uninstallApk', {'packageName': packageName});
+      await _channel.invokeMethod(
+        'uninstallApk',
+        {'packageName': packageName},
+      );
     } catch (_) {}
   }
 
-  Future<void> openApp(String packageName) async {
+  Future<void> launchApp(String packageName) async {
     try {
-      await InstalledApps.startApp(packageName);
+      await _channel.invokeMethod(
+        'launchApp',
+        {'packageName': packageName},
+      );
     } catch (_) {}
+  }
+
+  Future<AppInfo?> getPackageInfo(String packageName) async {
+    try {
+      final response = await _channel.invokeMethod(
+        'getPackageInfo',
+        {'packageName': packageName},
+      );
+      return AppInfo.from(response);
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<String> getCPUArchitecture() async {

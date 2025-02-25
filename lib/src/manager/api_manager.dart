@@ -70,10 +70,9 @@ class ApiManager {
     try {
       final appRelease = await getMyAppLatestRelease();
       final package = await PackageInfo.fromPlatform();
-      final versionFromGitHub = appRelease.tagName.toVersionInteger();
-      final currentVersion = '${package.version}+${package.buildNumber}';
-      final packageVersion = currentVersion.toVersionInteger();
-      final updateAvailable = versionFromGitHub > packageVersion;
+      final latest = appRelease.tagName;
+      final current = '${package.version}+${package.buildNumber}';
+      final updateAvailable = current.compareVersionTo(latest);
       return CheckUpdate(updateAvailable, appRelease);
     } catch (_) {
       return CheckUpdate(false, null);

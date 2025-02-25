@@ -35,15 +35,25 @@ class MainActivity : FlutterActivity() {
             when (call.method) {
                 "installApk" -> {
                     call.argument<String>("filePath")?.let {
-                        installApk(it)
-                        result.success("Method installApk called")
+                        result.success(installApk(it))
                     }
                 }
 
                 "uninstallApk" -> {
                     call.argument<String>("packageName")?.let {
-                        uninstallApk(it)
-                        result.success("Method uninstallApk called")
+                        result.success(uninstallApk(it))
+                    }
+                }
+
+                "launchApp" -> {
+                    call.argument<String>("packageName")?.let {
+                        result.success(launchApp(it))
+                    }
+                }
+
+                "getPackageInfo" -> {
+                    call.argument<String>("packageName")?.let {
+                        result.success(getPackageInfo(it))
                     }
                 }
             }
@@ -56,20 +66,56 @@ class MainActivity : FlutterActivity() {
         super.onDestroy()
     }
 
-    private fun installApk(filePath: String) {
-        val file = File(filePath)
-        val uri = FileProvider.getUriForFile(this, "com.mastertipsy.revancedmanager", file)
-        val intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
-        intent.data = uri
-        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-        startActivity(intent)
+    private fun installApk(filePath: String): Boolean {
+        try {
+            val file = File(filePath)
+            val uri = FileProvider.getUriForFile(
+                this,
+                "com.mastertipsy.revancedmanager",
+                file,
+            )
+            val intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
+            intent.data = uri
+            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            startActivity(intent)
+            return true
+        } catch (_: Exception) {
+            return false
+        }
     }
 
-    private fun uninstallApk(packageName: String) {
-        val uri = Uri.parse("package:$packageName")
-        val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
-        intent.data = uri
-        startActivity(intent)
+    private fun uninstallApk(packageName: String): Boolean {
+        try {
+            val uri = Uri.parse("package:$packageName")
+            val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
+            intent.data = uri
+            startActivity(intent)
+            return true
+        } catch (_: Exception) {
+            return false
+        }
+    }
+
+    private fun launchApp(packageName: String): Boolean {
+        try {
+            val intent = packageManager.getLaunchIntentForPackage(packageName)
+            startActivity(intent)
+            return true
+        } catch (_: Exception) {
+            return false
+        }
+    }
+
+    private fun getPackageInfo(packageName: String): Map<String, Any?>? {
+        try {
+            val packageInfo = packageManager.getPackageInfo(packageName, 0)
+            if (packageInfo != null) {
+                return mapOf("version_name" to packageInfo.versionName)
+            }
+            return null
+        } catch (_: Exception) {
+            return null
+        }
     }
 
     private fun registerInstallReceiver() {

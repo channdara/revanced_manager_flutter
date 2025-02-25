@@ -1,9 +1,7 @@
-import 'package:installed_apps/installed_apps.dart';
-
 import '../extension/string_extension.dart';
-import 'application_model.dart';
+import '../manager/application_manager.dart';
 
-class RevancedApplication extends ApplicationModel {
+class RevancedApplication {
   RevancedApplication(
     /// From API
     this.appName,
@@ -46,10 +44,10 @@ class RevancedApplication extends ApplicationModel {
         RevancedApplication item = RevancedApplication.fromJson(json);
         final packageName = item.androidPackageName;
         if (packageName.isNotEmpty) {
-          final appInfo = await InstalledApps.getAppInfo(packageName);
+          final info = await ApplicationManager().getPackageInfo(packageName);
           item = item.copy(
-            isInstalled: appInfo != null,
-            installedVersionCode: appInfo?.versionName,
+            isInstalled: info != null,
+            installedVersionCode: info?.versionName,
           );
         }
         list.add(item);
@@ -93,8 +91,7 @@ class RevancedApplication extends ApplicationModel {
   }
 
   bool get updateAvailable {
-    final installed = installedVersionCode.toVersionInteger();
-    final latest = latestVersionCode.toVersionInteger();
-    return isInstalled && latest > installed;
+    return isInstalled &&
+        installedVersionCode.compareVersionTo(latestVersionCode);
   }
 }

@@ -1,6 +1,9 @@
 # Do not remove or rename entries in this file, only add new ones
 # See https://github.com/flutter/flutter/issues/128635 for more context.
 
+# This is dynamic in a monorepo
+bin/internal/engine.version
+
 # Miscellaneous
 *.class
 *.lock
@@ -23,6 +26,7 @@
 .project
 .settings/
 .vscode/*
+.ccls-cache
 
 # Flutter repo-specific
 /bin/cache/
@@ -69,10 +73,10 @@ unlinked_spec.ds
 **/android/captures/
 **/android/gradlew
 **/android/gradlew.bat
-**/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 *.jks
+local.properties
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -112,11 +116,13 @@ unlinked_spec.ds
 **/xcuserdata/
 
 # Windows
+**/windows/flutter/ephemeral/
 **/windows/flutter/generated_plugin_registrant.cc
 **/windows/flutter/generated_plugin_registrant.h
 **/windows/flutter/generated_plugins.cmake
 
 # Linux
+**/linux/flutter/ephemeral/
 **/linux/flutter/generated_plugin_registrant.cc
 **/linux/flutter/generated_plugin_registrant.h
 **/linux/flutter/generated_plugins.cmake
@@ -135,3 +141,11 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
+
+# Monorepo
+.cipd
+.gclient
+.gclient_entries
+.python-version
+.gclient_previous_custom_vars
+.gclient_previous_sync_commits

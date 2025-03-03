@@ -37,17 +37,17 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                 ListTile(
                   onTap: () {
                     bloc.openLinkInExternalBrowser(
-                      'https://ko-fi.com/rvmanager',
+                      'https://revanced.app/donate',
                     );
                   },
                   dense: true,
-                  title: const Text('Support ReVanced on Ko-fi'),
+                  title: const Text('Support ReVanced'),
                   trailing: const Icon(Icons.coffee_rounded),
                 ),
                 ListTile(
                   onTap: () {
                     bloc.openLinkInExternalBrowser(
-                      'https://github.com/revancedapps/revancedmanager',
+                      'https://github.com/ReVanced/revanced-manager',
                     );
                   },
                   dense: true,
@@ -56,7 +56,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                 ),
                 ListTile(
                   onTap: () {
-                    bloc.openLinkInExternalBrowser('https://revanced.net');
+                    bloc.openLinkInExternalBrowser('https://revanced.app');
                   },
                   dense: true,
                   title: const Text('ReVanced Website'),

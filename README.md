@@ -4,8 +4,8 @@ Welcome to ReVanced Manager, your go-to tool for managing ReVanced apps and othe
 revanced.net team, ReVanced Manager is inspired by the old popular app named Vanced Manager. We've taken the concept and
 enhanced it to provide you with a seamless experience in managing and updating your favorite apps.
 
-* ReVanced website: https://revanced.net
-* ReVanced Manager: https://github.com/revancedapps/revancedmanager
+* ReVanced Website: https://revanced.app
+* ReVanced Manager: https://github.com/ReVanced/revanced-manager
 
 # Revanced Manager Flutter
 

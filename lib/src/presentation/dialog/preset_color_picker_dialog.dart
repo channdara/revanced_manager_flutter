@@ -11,7 +11,8 @@ Future<Color?> showPresetColorPickerDialog(BuildContext context) {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                'Choose your favorite color',
+                'Choose Your Favorite Color',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,

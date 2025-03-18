@@ -12,7 +12,7 @@ scripts:
   prod: 'rps clean && rps build && rps rename && rps open'
 
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.6.2
 
 dependencies:
   flutter:

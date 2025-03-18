@@ -26,40 +26,40 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SettingsItemWidget(
-              titleLabel: 'Credit To The Owner',
+              titleLabel: 'Credit to RV Manager',
               children: [
                 const ListTile(
                   dense: true,
                   subtitle: Text(
-                    "Welcome to ReVanced Manager, your go-to tool for managing ReVanced apps and other modded APKs. Developed by the revanced.net team, ReVanced Manager is inspired by the old popular app named Vanced Manager. We've taken the concept and enhanced it to provide you with a seamless experience in managing and updating your favorite apps.",
+                    "Welcome to RV Manager, your go-to tool for managing RV apps and other modded APKs. RV Manager is inspired by the old popular app named Vanced Manager. We've taken the concept and enhanced it to provide you with a seamless experience in managing and updating your favorite apps.",
                   ),
                 ),
+                // ListTile(
+                //   onTap: () {
+                //     bloc.openLinkInExternalBrowser(
+                //       'https://revanced.app/donate',
+                //     );
+                //   },
+                //   dense: true,
+                //   title: const Text('Support RV Manager'),
+                //   trailing: const Icon(Icons.coffee_rounded),
+                // ),
                 ListTile(
                   onTap: () {
                     bloc.openLinkInExternalBrowser(
-                      'https://revanced.app/donate',
+                      'https://github.com/vancedapps/rv-manager',
                     );
                   },
                   dense: true,
-                  title: const Text('Support ReVanced'),
-                  trailing: const Icon(Icons.coffee_rounded),
-                ),
-                ListTile(
-                  onTap: () {
-                    bloc.openLinkInExternalBrowser(
-                      'https://github.com/ReVanced/revanced-manager',
-                    );
-                  },
-                  dense: true,
-                  title: const Text('ReVanced Source Code'),
+                  title: const Text('RV Manager GitHub'),
                   trailing: const Icon(Icons.code_rounded),
                 ),
                 ListTile(
                   onTap: () {
-                    bloc.openLinkInExternalBrowser('https://revanced.app');
+                    bloc.openLinkInExternalBrowser('https://vanced.to');
                   },
                   dense: true,
-                  title: const Text('ReVanced Website'),
+                  title: const Text('RV Website'),
                   trailing: const Icon(Icons.public_rounded),
                 ),
               ],
@@ -70,7 +70,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                 const ListTile(
                   dense: true,
                   subtitle: Text(
-                    'A fun project, rebuilding the original ReVanced Manager using Flutter framework. Please refer to the original website or applications by the sources above.',
+                    'A fun project, rebuilding the original RV Manager using Flutter framework with Material 3 design. Please refer to the original website or applications by the sources above.',
                   ),
                 ),
                 ListTile(
@@ -100,7 +100,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                     );
                   },
                   dense: true,
-                  title: const Text('This Project Source Code'),
+                  title: const Text('This Project GitHub'),
                   trailing: const Icon(Icons.code_rounded),
                 ),
               ],

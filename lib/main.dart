@@ -55,6 +55,7 @@ class _ApplicationState extends BaseStateful<Application> {
       theme: ThemeData(
         brightness: Brightness.light,
         fontFamily: 'Rubik',
+        fontFamilyFallback: const ['Rubik'],
         colorSchemeSeed: _accentColor ?? widget.accentColor,
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
@@ -77,6 +78,7 @@ class _ApplicationState extends BaseStateful<Application> {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         fontFamily: 'Rubik',
+        fontFamilyFallback: const ['Rubik'],
         colorSchemeSeed: _accentColor ?? widget.accentColor,
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(

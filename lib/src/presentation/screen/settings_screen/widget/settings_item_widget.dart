@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/app_text_style.dart';
+
 class SettingsItemWidget extends StatelessWidget {
   const SettingsItemWidget({
     super.key,
@@ -27,10 +29,8 @@ class SettingsItemWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     titleLabel,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                    style: AppTextStyle.s14Bold
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
                 if (trailingTitle != null) trailingTitle!,

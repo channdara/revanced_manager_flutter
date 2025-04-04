@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
+import '../../../common/app_text_style.dart';
 import '../../../extension/context_extension.dart';
 import '../../../extension/int_extension.dart';
 import '../../../manager/callback_manager.dart';
@@ -57,7 +58,10 @@ class _SettingsScreenState
               children: [
                 ListTile(
                   dense: true,
-                  title: const Text('Enable Dark Mode'),
+                  title: const Text(
+                    'Enable Dark Mode',
+                    style: AppTextStyle.s14,
+                  ),
                   trailing: Transform.scale(
                     scale: 0.8,
                     child: Switch(
@@ -75,7 +79,10 @@ class _SettingsScreenState
                 ),
                 ListTile(
                   dense: true,
-                  title: const Text('Accent Color'),
+                  title: const Text(
+                    'Accent Color',
+                    style: AppTextStyle.s14,
+                  ),
                   trailing: IconButton(
                     onPressed: () {
                       showPresetColorPickerDialog(context).then((color) {
@@ -105,7 +112,10 @@ class _SettingsScreenState
                     buildWhen: (p, c) => c is SettingsStateDirectoryCacheSize,
                     builder: (context, state) {
                       final size = bloc.totalCacheSize.toFileSize();
-                      return Text('Clear Cache $size');
+                      return Text(
+                        'Clear Cache $size',
+                        style: AppTextStyle.s14,
+                      );
                     },
                   ),
                   trailing: IconButton(
@@ -124,7 +134,10 @@ class _SettingsScreenState
               trailingTitle: bloc.builder(
                 buildWhen: (p, c) => c is SettingsStateGotCurrentVersion,
                 builder: (context, state) {
-                  return Text('v${bloc.currentVersion}');
+                  return Text(
+                    'v${bloc.currentVersion}',
+                    style: AppTextStyle.s14,
+                  );
                 },
               ),
               children: [
@@ -134,7 +147,10 @@ class _SettingsScreenState
                         state is SettingsStateDownloadingUpdate;
                     return ListTile(
                       dense: true,
-                      title: const Text('Check for Updates'),
+                      title: const Text(
+                        'Check for Updates',
+                        style: AppTextStyle.s14,
+                      ),
                       subtitle: showLoadingProgress
                           ? LinearProgressIndicator(
                               value: bloc.progressing,
@@ -142,7 +158,7 @@ class _SettingsScreenState
                             )
                           : Text(
                               'Last check on ${bloc.lastUpdateCheck}',
-                              style: const TextStyle(fontSize: 10.0),
+                              style: AppTextStyle.s10,
                             ),
                       trailing: IconButton(
                         onPressed: bloc.isLoading || bloc.downloading

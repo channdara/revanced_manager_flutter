@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../common/app_text_style.dart';
 import '../../model/revanced_application.dart';
 
 void showCancelDownloadingDialog(
@@ -8,7 +9,7 @@ void showCancelDownloadingDialog(
   RevancedApplication app,
   VoidCallback onConfirm,
 ) {
-  showDialog(
+  showDialog<void>(
     context: context,
     builder: (context) {
       return Dialog(
@@ -20,16 +21,11 @@ void showCancelDownloadingDialog(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Cancel Downloading',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  Text('Cancel Downloading', style: AppTextStyle.s18Bold),
                   SizedBox(height: 8.0),
                   Text(
                     'Are you sure you want to cancel downloading the application below?',
+                    style: AppTextStyle.s14,
                   ),
                 ],
               ),
@@ -39,16 +35,10 @@ void showCancelDownloadingDialog(
                 imageUrl: app.icon,
                 fit: BoxFit.cover,
               ),
-              title: Text(
-                app.appName,
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              title: Text(app.appName, style: AppTextStyle.s16Bold),
               subtitle: Text(
                 app.appShortDescription,
-                style: const TextStyle(fontSize: 10.0),
+                style: AppTextStyle.s10,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -62,7 +52,7 @@ void showCancelDownloadingDialog(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text('Reconsider'),
+                    child: const Text('Reconsider', style: AppTextStyle.s14),
                   ),
                   const SizedBox(width: 16.0),
                   ElevatedButton(
@@ -77,7 +67,7 @@ void showCancelDownloadingDialog(
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
                     ),
-                    child: const Text('Cancel Now'),
+                    child: const Text('Cancel Now', style: AppTextStyle.s14),
                   ),
                 ],
               ),

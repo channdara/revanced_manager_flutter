@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../base/base_stateful_bloc.dart';
+import '../../common/app_text_style.dart';
 import '../../extension/context_extension.dart';
 import 'settings_screen/bloc/settings_bloc.dart';
 import 'settings_screen/widget/settings_item_widget.dart';
@@ -32,6 +33,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                   dense: true,
                   subtitle: Text(
                     "Welcome to RV Manager, your go-to tool for managing RV apps and other modded APKs. RV Manager is inspired by the old popular app named Vanced Manager. We've taken the concept and enhanced it to provide you with a seamless experience in managing and updating your favorite apps.",
+                    style: AppTextStyle.s12,
                   ),
                 ),
                 // ListTile(
@@ -41,7 +43,10 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                 //     );
                 //   },
                 //   dense: true,
-                //   title: const Text('Support RV Manager'),
+                //   title: const Text(
+                //     'Support RV Manager',
+                //     style: AppTextStyle.s14,
+                //   ),
                 //   trailing: const Icon(Icons.coffee_rounded),
                 // ),
                 ListTile(
@@ -51,7 +56,10 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                     );
                   },
                   dense: true,
-                  title: const Text('RV Manager GitHub'),
+                  title: const Text(
+                    'RV Manager GitHub',
+                    style: AppTextStyle.s14,
+                  ),
                   trailing: const Icon(Icons.code_rounded),
                 ),
                 ListTile(
@@ -59,7 +67,10 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                     bloc.openLinkInExternalBrowser('https://vanced.to');
                   },
                   dense: true,
-                  title: const Text('RV Website'),
+                  title: const Text(
+                    'RV Website',
+                    style: AppTextStyle.s14,
+                  ),
                   trailing: const Icon(Icons.public_rounded),
                 ),
               ],
@@ -71,6 +82,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                   dense: true,
                   subtitle: Text(
                     'A fun project, rebuilding the original RV Manager using Flutter framework with Material 3 design. Please refer to the original website or applications by the sources above.',
+                    style: AppTextStyle.s12,
                   ),
                 ),
                 ListTile(
@@ -80,7 +92,10 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                     );
                   },
                   dense: true,
-                  title: const Text('Buy me a Coffee'),
+                  title: const Text(
+                    'Buy me a Coffee',
+                    style: AppTextStyle.s14,
+                  ),
                   trailing: const Icon(Icons.coffee_rounded),
                 ),
                 ListTile(
@@ -90,7 +105,10 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                     );
                   },
                   dense: true,
-                  title: const Text('Support me on Ko-fi'),
+                  title: const Text(
+                    'Support me on Ko-fi',
+                    style: AppTextStyle.s14,
+                  ),
                   trailing: const Icon(Icons.coffee_rounded),
                 ),
                 ListTile(
@@ -100,7 +118,10 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                     );
                   },
                   dense: true,
-                  title: const Text('This Project GitHub'),
+                  title: const Text(
+                    'This Project GitHub',
+                    style: AppTextStyle.s14,
+                  ),
                   trailing: const Icon(Icons.code_rounded),
                 ),
               ],

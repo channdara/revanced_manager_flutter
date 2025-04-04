@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/app_text_style.dart';
 import '../../about_screen.dart';
 import '../../changelog_screen/changelog_screen.dart';
 import '../../settings_screen/settings_screen.dart';
@@ -15,7 +16,8 @@ class MainActionMenuWidget extends StatelessWidget {
       EdgeInsets.only(left: 16.0, right: 32.0);
 
   void _push(BuildContext context, Widget screen) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => screen));
+    Navigator.of(context)
+        .push(MaterialPageRoute<dynamic>(builder: (_) => screen));
   }
 
   @override
@@ -29,7 +31,7 @@ class MainActionMenuWidget extends StatelessWidget {
       padding: EdgeInsets.zero,
       itemBuilder: (context) {
         return [
-          PopupMenuItem(
+          PopupMenuItem<dynamic>(
             onTap: () {
               _push(context, const SettingsScreen());
             },
@@ -39,11 +41,11 @@ class MainActionMenuWidget extends StatelessWidget {
               children: [
                 Icon(Icons.settings_rounded, size: _iconSize),
                 _widthSpacing,
-                Text('Settings'),
+                Text('Settings', style: AppTextStyle.s14),
               ],
             ),
           ),
-          PopupMenuItem(
+          PopupMenuItem<dynamic>(
             onTap: () {
               _push(context, const SettingsScreen(autoCheckUpdate: true));
             },
@@ -53,7 +55,10 @@ class MainActionMenuWidget extends StatelessWidget {
               children: [
                 const Icon(Icons.update_rounded, size: _iconSize),
                 _widthSpacing,
-                Text(updateAvailable ? 'Update Available' : 'Check Update'),
+                Text(
+                  updateAvailable ? 'Update Available' : 'Check Update',
+                  style: AppTextStyle.s14,
+                ),
                 if (updateAvailable) ...[
                   _widthSpacing,
                   const Icon(Icons.circle, size: 10.0, color: Colors.orange),
@@ -61,7 +66,7 @@ class MainActionMenuWidget extends StatelessWidget {
               ],
             ),
           ),
-          PopupMenuItem(
+          PopupMenuItem<dynamic>(
             onTap: () {
               _push(context, const ChangelogScreen());
             },
@@ -71,11 +76,11 @@ class MainActionMenuWidget extends StatelessWidget {
               children: [
                 Icon(Icons.notes_rounded, size: _iconSize),
                 _widthSpacing,
-                Text('Changelog'),
+                Text('Changelog', style: AppTextStyle.s14),
               ],
             ),
           ),
-          PopupMenuItem(
+          PopupMenuItem<dynamic>(
             onTap: () {
               _push(context, const AboutScreen());
             },
@@ -85,7 +90,7 @@ class MainActionMenuWidget extends StatelessWidget {
               children: [
                 Icon(Icons.info_rounded, size: _iconSize),
                 _widthSpacing,
-                Text('About'),
+                Text('About', style: AppTextStyle.s14),
               ],
             ),
           ),

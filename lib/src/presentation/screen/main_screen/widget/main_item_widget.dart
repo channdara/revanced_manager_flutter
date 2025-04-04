@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../common/app_text_style.dart';
 import '../../../../model/revanced_application.dart';
 import '../bloc/main_bloc.dart';
 import 'main_item_action_widget.dart';
@@ -41,18 +42,12 @@ class MainItemWidget extends StatelessWidget {
                     children: [
                       Text(
                         app.appName,
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTextStyle.s16Bold,
                       ),
                       const SizedBox(height: 4.0),
                       Text(
                         app.appShortDescription,
-                        style: const TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.grey,
-                        ),
+                        style: AppTextStyle.s12Grey,
                       ),
                     ],
                   ),
@@ -67,7 +62,7 @@ class MainItemWidget extends StatelessWidget {
                 Flexible(
                   child: Text(
                     'Installed: ${app.installedVersionCode}',
-                    style: const TextStyle(fontSize: 12.0),
+                    style: AppTextStyle.s12,
                   ),
                 ),
                 const Padding(
@@ -77,16 +72,13 @@ class MainItemWidget extends StatelessWidget {
                 Flexible(
                   child: Text(
                     'Latest: ${app.latestVersionCode}',
-                    style: const TextStyle(fontSize: 12.0),
+                    style: AppTextStyle.s12,
                   ),
                 ),
               ],
             ),
           ),
-          MainItemActionWidget(
-            bloc: bloc,
-            app: app,
-          ),
+          MainItemActionWidget(bloc: bloc, app: app),
         ],
       ),
     );

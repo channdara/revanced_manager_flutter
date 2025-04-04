@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../common/app_text_style.dart';
+
 void showClearCacheDialog(BuildContext context, VoidCallback onConfirm) {
-  showDialog(
+  showDialog<void>(
     context: context,
     builder: (context) {
       return Dialog(
@@ -11,18 +13,13 @@ void showClearCacheDialog(BuildContext context, VoidCallback onConfirm) {
           children: [
             const Padding(
               padding: EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 0.0),
-              child: Text(
-                'Clear Cache',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: Text('Clear Cache', style: AppTextStyle.s18Bold),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 32.0),
               child: Text(
                 '\nAre you sure you want to clear cache? All downloaded file will be remove and you will need to re-download the same app version again.\n\nThis will not effect the installed ReVanced apps.',
+                style: AppTextStyle.s14,
               ),
             ),
             Padding(
@@ -34,7 +31,7 @@ void showClearCacheDialog(BuildContext context, VoidCallback onConfirm) {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text("Don't Clear"),
+                    child: const Text("Don't Clear", style: AppTextStyle.s14),
                   ),
                   const SizedBox(width: 16.0),
                   ElevatedButton(
@@ -49,7 +46,7 @@ void showClearCacheDialog(BuildContext context, VoidCallback onConfirm) {
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
                     ),
-                    child: const Text('Yes Clear'),
+                    child: const Text('Yes Clear', style: AppTextStyle.s14),
                   ),
                 ],
               ),

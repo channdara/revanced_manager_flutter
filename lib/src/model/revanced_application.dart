@@ -1,4 +1,4 @@
-import '../extension/string_extension.dart';
+import '../common/common.dart';
 import '../manager/application_manager.dart';
 
 class RevancedApplication {
@@ -92,6 +92,6 @@ class RevancedApplication {
 
   bool get updateAvailable {
     return isInstalled &&
-        installedVersionCode.compareVersionTo(latestVersionCode);
+        newVersionAvailable(installedVersionCode, latestVersionCode);
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'src/base/base_stateful.dart';
+import 'src/common/app_text_style.dart';
+import 'src/common/common.dart';
 import 'src/manager/callback_manager.dart';
 import 'src/manager/preferences_manager.dart';
 import 'src/presentation/screen/splash_screen.dart';
@@ -9,10 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final themeMode = await PreferencesManager().themeMode();
   final accentColor = await PreferencesManager().accentColor();
-  runApp(Application(
-    themeMode: themeMode,
-    accentColor: accentColor,
-  ));
+  runApp(Application(themeMode: themeMode, accentColor: accentColor));
 }
 
 class Application extends StatefulWidget {
@@ -54,8 +53,7 @@ class _ApplicationState extends BaseStateful<Application> {
       themeMode: _themeMode ?? widget.themeMode,
       theme: ThemeData(
         brightness: Brightness.light,
-        fontFamily: 'Rubik',
-        fontFamilyFallback: const ['Rubik'],
+        fontFamily: AppCommon.fontFamily,
         colorSchemeSeed: _accentColor ?? widget.accentColor,
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
@@ -74,11 +72,13 @@ class _ApplicationState extends BaseStateful<Application> {
           margin: EdgeInsets.zero,
           clipBehavior: Clip.antiAliasWithSaveLayer,
         ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: AppTextStyle.appBarTitleTextStyle,
+        ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        fontFamily: 'Rubik',
-        fontFamilyFallback: const ['Rubik'],
+        fontFamily: AppCommon.fontFamily,
         colorSchemeSeed: _accentColor ?? widget.accentColor,
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
@@ -96,6 +96,9 @@ class _ApplicationState extends BaseStateful<Application> {
         cardTheme: const CardTheme(
           margin: EdgeInsets.zero,
           clipBehavior: Clip.antiAliasWithSaveLayer,
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: AppTextStyle.appBarTitleTextStyle,
         ),
       ),
     );

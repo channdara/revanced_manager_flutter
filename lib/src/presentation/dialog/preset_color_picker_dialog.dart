@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../common/app_text_style.dart';
+
 Future<Color?> showPresetColorPickerDialog(BuildContext context) {
   return showDialog<Color>(
     context: context,
@@ -13,10 +15,7 @@ Future<Color?> showPresetColorPickerDialog(BuildContext context) {
               const Text(
                 'Choose Your Favorite Color',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: AppTextStyle.s18Bold,
               ),
               const SizedBox(height: 32.0),
               Wrap(

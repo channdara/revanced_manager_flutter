@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../base/base_stateful.dart';
+import '../../common/app_text_style.dart';
 import 'main_screen/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,8 +16,10 @@ class _SplashScreenState extends BaseStateful<SplashScreen> {
   void initStatePostFrameCallback() {
     super.initStatePostFrameCallback();
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const MainScreen()));
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute<dynamic>(builder: (_) => const MainScreen()));
+      }
     });
   }
 
@@ -38,7 +41,12 @@ class _SplashScreenState extends BaseStateful<SplashScreen> {
         color: Colors.transparent,
         height: kToolbarHeight,
         padding: EdgeInsets.zero,
-        child: Center(child: Text('This is not the original ReVanced Manager')),
+        child: Center(
+          child: Text(
+            'This is not the original ReVanced Manager',
+            style: AppTextStyle.s14,
+          ),
+        ),
       ),
     );
   }

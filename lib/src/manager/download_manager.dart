@@ -18,7 +18,7 @@ class DownloadManager {
 
   Future<String> downloadRevancedApplication(
     RevancedApplication app,
-    Function(double progress) onReceiveProgress,
+    void Function(double progress) onReceiveProgress,
   ) async {
     final url = app.latestVersionUrl;
     if (url.isEmpty) return '';
@@ -44,7 +44,7 @@ class DownloadManager {
 
   Future<String> downloadMyApplication(
     MyApplication app,
-    Function(double progress) onReceiveProgress,
+    void Function(double progress) onReceiveProgress,
   ) async {
     final url = app.downloadUrl;
     if (url.isEmpty) return '';

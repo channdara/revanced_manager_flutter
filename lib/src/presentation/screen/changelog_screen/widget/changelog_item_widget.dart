@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/app_text_style.dart';
 import '../../../../model/my_application.dart';
 
 class ChangelogItemWidget extends StatelessWidget {
@@ -29,10 +30,7 @@ class ChangelogItemWidget extends StatelessWidget {
                 Flexible(
                   child: Text(
                     application.tagName,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTextStyle.s16Bold,
                   ),
                 ),
                 const SizedBox(width: 8.0),
@@ -44,13 +42,7 @@ class ChangelogItemWidget extends StatelessWidget {
                     ),
                     margin: const EdgeInsets.only(left: 8.0),
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: const Text(
-                      'Latest',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        color: Colors.green,
-                      ),
-                    ),
+                    child: const Text('Latest', style: AppTextStyle.s12Green),
                   ),
                 if (isCurrent)
                   Container(
@@ -60,18 +52,12 @@ class ChangelogItemWidget extends StatelessWidget {
                     ),
                     margin: const EdgeInsets.only(left: 8.0),
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: const Text(
-                      'Current',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        color: Colors.blue,
-                      ),
-                    ),
+                    child: const Text('Current', style: AppTextStyle.s12Blue),
                   ),
               ],
             ),
-            const SizedBox(height: 8.0),
-            Text(application.body),
+            const SizedBox(height: 16.0),
+            Text(application.body, style: AppTextStyle.s14),
           ],
         ),
       ),

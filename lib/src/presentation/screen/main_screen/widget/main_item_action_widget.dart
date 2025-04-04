@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/app_text_style.dart';
 import '../../../../manager/application_manager.dart';
 import '../../../../model/revanced_application.dart';
 import '../../../dialog/cancel_downloading_dialog.dart';
@@ -65,7 +66,7 @@ class MainItemActionWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6.0),
                     );
                   }
-                  return const Text('Update');
+                  return const Text('Update', style: AppTextStyle.s14);
                 },
               ),
             ),
@@ -80,7 +81,7 @@ class MainItemActionWidget extends StatelessWidget {
                 foregroundColor: Colors.red,
                 shape: const RoundedRectangleBorder(),
               ),
-              child: const Text('Uninstall'),
+              child: const Text('Uninstall', style: AppTextStyle.s14),
             ),
           ),
         if (app.isInstalled)
@@ -92,7 +93,7 @@ class MainItemActionWidget extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(),
               ),
-              child: const Text('Open'),
+              child: const Text('Open', style: AppTextStyle.s14),
             ),
           ),
         if (!app.isInstalled)
@@ -115,7 +116,7 @@ class MainItemActionWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6.0),
                     );
                   }
-                  return const Text('Download');
+                  return const Text('Download', style: AppTextStyle.s14);
                 },
               ),
             ),

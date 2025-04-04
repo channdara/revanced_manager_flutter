@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../extension/string_extension.dart';
+import '../common/common.dart';
 import '../model/check_update.dart';
 import '../model/my_application.dart';
 import '../model/revanced_application.dart';
@@ -22,7 +21,7 @@ class ApiManager {
     requestBody: true,
     compact: false,
     maxWidth: 180,
-    enabled: kDebugMode,
+    enabled: false,
   );
 
   String _endpoint = '';
@@ -44,7 +43,7 @@ class ApiManager {
 
   Future<List<RevancedApplication>> getRevancedApplications() async {
     if (_endpoint.isEmpty) _endpoint = await _getEndpointByCPUArchitecture();
-    final response = await _revancedDio.get(_endpoint);
+    final response = await _revancedDio.get<dynamic>(_endpoint);
     final items = await RevancedApplication.fromJsonList(response.data);
     items.sort((current, next) => current.isInstalled != next.isInstalled
         ? ((next.isInstalled) ? 1 : -1)
@@ -53,14 +52,14 @@ class ApiManager {
   }
 
   Future<MyApplication> getMyAppLatestRelease() async {
-    final response = await _gitHubDio.get(
+    final response = await _gitHubDio.get<dynamic>(
       '/repos/channdara/revanced_manager_flutter/releases/latest',
     );
     return MyApplication.fromJson(response.data);
   }
 
   Future<List<MyApplication>> getMyAppAllReleases() async {
-    final response = await _gitHubDio.get(
+    final response = await _gitHubDio.get<dynamic>(
       '/repos/channdara/revanced_manager_flutter/releases',
     );
     return MyApplication.fromJsonList(response.data);
@@ -72,7 +71,7 @@ class ApiManager {
       final package = await PackageInfo.fromPlatform();
       final latest = appRelease.tagName;
       final current = '${package.version}+${package.buildNumber}';
-      final updateAvailable = current.compareVersionTo(latest);
+      final updateAvailable = newVersionAvailable(current, latest);
       return CheckUpdate(updateAvailable, appRelease);
     } catch (_) {
       return CheckUpdate(false, null);

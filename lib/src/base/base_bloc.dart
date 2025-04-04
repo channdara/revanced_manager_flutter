@@ -35,7 +35,7 @@ abstract class BaseBloc extends BlocBase<BaseBlocState> {
 
   Future<void> execute({
     required Future<void> Function() requesting,
-    Function(dynamic exception)? onError,
+    void Function(dynamic exception)? onError,
   }) async {
     if (isLoading) return;
     try {

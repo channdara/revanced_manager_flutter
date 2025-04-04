@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../common/app_text_style.dart';
+
 class AppErrorWidget extends StatelessWidget {
   const AppErrorWidget({super.key, this.padding});
 
@@ -20,15 +22,13 @@ class AppErrorWidget extends StatelessWidget {
           ),
           const Text(
             'Oops! Something went wrong...',
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppTextStyle.s16Bold,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8.0),
           const Text(
             "We're unable to process your request right now. Please try again later...",
+            style: AppTextStyle.s14,
             textAlign: TextAlign.center,
           )
         ],

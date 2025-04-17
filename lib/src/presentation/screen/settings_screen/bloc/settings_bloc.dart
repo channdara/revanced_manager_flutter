@@ -105,7 +105,7 @@ class SettingsBloc extends BaseBloc {
         }
       });
       _timer = Timer.periodic(const Duration(milliseconds: 250), (timer) {
-        if ((progressing ?? 0.0) >= 0.98) _resetDownloading();
+        if ((progressing ?? 0.0) >= 1.0) _resetDownloading();
         safeEmit(SettingsStateDownloadingUpdate());
       });
     } catch (_) {

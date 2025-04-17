@@ -55,16 +55,11 @@ class _ApplicationState extends BaseStateful<Application> {
         brightness: Brightness.light,
         fontFamily: AppCommon.fontFamily,
         colorSchemeSeed: _accentColor ?? widget.accentColor,
-        iconButtonTheme: IconButtonThemeData(
-          style: IconButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-        ),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0.0,
             shadowColor: Colors.transparent,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
@@ -75,21 +70,19 @@ class _ApplicationState extends BaseStateful<Application> {
         appBarTheme: const AppBarTheme(
           titleTextStyle: AppTextStyle.appBarTitleTextStyle,
         ),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          year2023: false,
+        ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         fontFamily: AppCommon.fontFamily,
         colorSchemeSeed: _accentColor ?? widget.accentColor,
-        iconButtonTheme: IconButtonThemeData(
-          style: IconButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-        ),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0.0,
             shadowColor: Colors.transparent,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -98,7 +91,10 @@ class _ApplicationState extends BaseStateful<Application> {
           clipBehavior: Clip.antiAliasWithSaveLayer,
         ),
         appBarTheme: const AppBarTheme(
-          titleTextStyle: AppTextStyle.appBarTitleTextStyle,
+          titleTextStyle: AppTextStyle.appBarDarkTitleTextStyle,
+        ),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          year2023: false,
         ),
       ),
     );

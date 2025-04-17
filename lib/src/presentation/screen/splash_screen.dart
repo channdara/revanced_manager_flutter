@@ -15,7 +15,7 @@ class _SplashScreenState extends BaseStateful<SplashScreen> {
   @override
   void initStatePostFrameCallback() {
     super.initStatePostFrameCallback();
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute<dynamic>(builder: (_) => const MainScreen()));

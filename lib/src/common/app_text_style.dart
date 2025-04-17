@@ -55,6 +55,13 @@ class AppTextStyle {
     fontSize: 22.0,
     fontFamily: AppCommon.fontFamily,
     fontVariations: _normal,
+    color: Colors.black,
+  );
+  static const TextStyle appBarDarkTitleTextStyle = TextStyle(
+    fontSize: 22.0,
+    fontFamily: AppCommon.fontFamily,
+    fontVariations: _normal,
+    color: Colors.white,
   );
   static const TextStyle s22 =
       TextStyle(fontSize: 22.0, fontVariations: _normal);

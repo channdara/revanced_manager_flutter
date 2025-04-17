@@ -73,7 +73,7 @@ class MainBloc extends BaseBloc {
       });
       status?.timer =
           Timer.periodic(const Duration(milliseconds: 250), (timer) {
-        if (status.progressing >= 0.98) {
+        if (status.progressing >= 1.0) {
           _resetDownloading(packageName);
         }
         safeEmit(MainStateDownloadApplication());

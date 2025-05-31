@@ -27,7 +27,7 @@ class ApiManager {
   String _endpoint = '';
 
   final Dio _revancedDio = Dio(BaseOptions(
-    baseUrl: 'https://revanced.net',
+    baseUrl: 'https://vanced.to',
     connectTimeout: _timeout,
     receiveTimeout: _timeout,
     sendTimeout: _timeout,

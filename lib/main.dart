@@ -63,7 +63,7 @@ class _ApplicationState extends BaseStateful<Application> {
           ),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
-        cardTheme: const CardTheme(
+        cardTheme: const CardThemeData(
           margin: EdgeInsets.zero,
           clipBehavior: Clip.antiAliasWithSaveLayer,
         ),
@@ -86,7 +86,7 @@ class _ApplicationState extends BaseStateful<Application> {
           ),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
-        cardTheme: const CardTheme(
+        cardTheme: const CardThemeData(
           margin: EdgeInsets.zero,
           clipBehavior: Clip.antiAliasWithSaveLayer,
         ),

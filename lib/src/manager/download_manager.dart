@@ -72,4 +72,9 @@ class DownloadManager {
     _cancelTokens[packageName]?.cancel();
     _cancelTokens.remove(packageName);
   }
+
+  void cancelAllDownloading() {
+    _cancelTokens.values.forEach((e) => e.cancel());
+    _cancelTokens.clear();
+  }
 }

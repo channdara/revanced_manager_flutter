@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../common/app_text_style.dart';
 
-class AppErrorWidget extends StatelessWidget {
-  const AppErrorWidget({super.key, this.padding});
+class AppEmptyWidget extends StatelessWidget {
+  const AppEmptyWidget({super.key, this.padding});
 
   final EdgeInsetsGeometry? padding;
 
@@ -17,7 +17,7 @@ class AppErrorWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/image/img_error.png',
+            'assets/image/img_empty.png',
             width: 100.0,
             color: Theme.of(context).brightness == Brightness.dark
                 ? Colors.white
@@ -25,12 +25,12 @@ class AppErrorWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16.0),
           const Text(
-            'Oops! Something went wrong',
+            'Oops! No Result Found',
             style: AppTextStyle.s16Bold,
             textAlign: TextAlign.center,
           ),
           const Text(
-            "We're unable to process your request right now. Please try again later...",
+            'Try update filter or refresh the list...',
             style: AppTextStyle.s14,
             textAlign: TextAlign.center,
           )

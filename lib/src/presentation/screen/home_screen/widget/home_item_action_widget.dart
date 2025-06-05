@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../../../../common/app_text_style.dart';
 import '../../../../manager/application_manager.dart';
+import '../../../../model/download_status.dart';
 import '../../../../model/revanced_application.dart';
 import '../../../dialog/cancel_downloading_dialog.dart';
-import '../bloc/download_status.dart';
-import '../bloc/main_bloc.dart';
-import '../bloc/main_bloc_state.dart';
+import '../bloc/home_bloc.dart';
+import '../bloc/home_bloc_state.dart';
 
-class MainItemActionWidget extends StatelessWidget {
-  const MainItemActionWidget({
+class HomeItemActionWidget extends StatelessWidget {
+  const HomeItemActionWidget({
     super.key,
     required this.bloc,
     required this.app,
   });
 
-  final MainBloc bloc;
+  final HomeBloc bloc;
   final RevancedApplication app;
 
   String get _packageName => app.androidPackageName;
@@ -57,7 +57,7 @@ class MainItemActionWidget extends StatelessWidget {
                 shape: const RoundedRectangleBorder(),
               ),
               child: bloc.builder(
-                buildWhen: (p, c) => c is MainStateDownloadApplication,
+                buildWhen: (p, c) => c is HomeStateDownloadApplication,
                 builder: (context, state) {
                   if (_downloading) {
                     return LinearProgressIndicator(
@@ -107,7 +107,7 @@ class MainItemActionWidget extends StatelessWidget {
                 shape: const RoundedRectangleBorder(),
               ),
               child: bloc.builder(
-                buildWhen: (p, c) => c is MainStateDownloadApplication,
+                buildWhen: (p, c) => c is HomeStateDownloadApplication,
                 builder: (context, state) {
                   if (_downloading) {
                     return LinearProgressIndicator(

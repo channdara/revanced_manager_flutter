@@ -11,7 +11,7 @@ class MockData {
         'App Short Description\nApp Short Description\nApp Short Description',
         false,
         'Latest Version Url',
-        'Icon',
+        '',
         index,
         false,
         'Installed Version Code',

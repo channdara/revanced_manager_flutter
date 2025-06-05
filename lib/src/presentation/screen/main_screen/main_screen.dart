@@ -12,6 +12,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Key _navigationBarKey = const Key('revanced_manager');
   int _selectedIndex = 0;
 
   void _onDestinationSelected(int index) {
@@ -24,6 +25,8 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
+        final number = DateTime.now().millisecondsSinceEpoch;
+        _navigationBarKey = Key('revanced_manager_$number');
         _onDestinationSelected(0);
       },
       canPop: _selectedIndex == 0,
@@ -37,6 +40,7 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
         bottomNavigationBar: NavigationBar(
+          key: _navigationBarKey,
           onDestinationSelected: _onDestinationSelected,
           selectedIndex: _selectedIndex,
           maintainBottomViewPadding: true,

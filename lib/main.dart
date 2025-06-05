@@ -4,6 +4,7 @@ import 'src/base/base_stateful.dart';
 import 'src/common/app_text_style.dart';
 import 'src/common/common.dart';
 import 'src/manager/callback_manager.dart';
+import 'src/manager/download_manager.dart';
 import 'src/manager/preferences_manager.dart';
 import 'src/presentation/screen/splash_screen.dart';
 
@@ -47,6 +48,12 @@ class _ApplicationState extends BaseStateful<Application> {
   }
 
   @override
+  void dispose() {
+    DownloadManager().cancelAllDownloading();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: const SplashScreen(),
@@ -69,9 +76,23 @@ class _ApplicationState extends BaseStateful<Application> {
         ),
         appBarTheme: const AppBarTheme(
           titleTextStyle: AppTextStyle.appBarTitleTextStyle,
+          actionsPadding: EdgeInsets.only(right: 8.0),
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           year2023: false,
+        ),
+        navigationBarTheme: NavigationBarThemeData(
+          labelTextStyle: MaterialStateProperty.resolveWith((states) {
+            return states.contains(WidgetState.selected)
+                ? AppTextStyle.s12Bold
+                : AppTextStyle.s12;
+          }),
+        ),
+        tabBarTheme: TabBarThemeData(
+          labelStyle:
+              AppTextStyle.s14.copyWith(fontFamily: AppCommon.fontFamily),
+          unselectedLabelStyle:
+              AppTextStyle.s14.copyWith(fontFamily: AppCommon.fontFamily),
         ),
       ),
       darkTheme: ThemeData(
@@ -92,9 +113,23 @@ class _ApplicationState extends BaseStateful<Application> {
         ),
         appBarTheme: const AppBarTheme(
           titleTextStyle: AppTextStyle.appBarDarkTitleTextStyle,
+          actionsPadding: EdgeInsets.only(right: 8.0),
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           year2023: false,
+        ),
+        navigationBarTheme: NavigationBarThemeData(
+          labelTextStyle: MaterialStateProperty.resolveWith((states) {
+            return states.contains(WidgetState.selected)
+                ? AppTextStyle.s12Bold
+                : AppTextStyle.s12;
+          }),
+        ),
+        tabBarTheme: TabBarThemeData(
+          labelStyle:
+              AppTextStyle.s14.copyWith(fontFamily: AppCommon.fontFamily),
+          unselectedLabelStyle:
+              AppTextStyle.s14.copyWith(fontFamily: AppCommon.fontFamily),
         ),
       ),
     );

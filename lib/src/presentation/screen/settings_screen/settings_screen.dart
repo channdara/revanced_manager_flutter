@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
 import '../../../common/app_text_style.dart';
-import '../../../extension/context_extension.dart';
 import '../../../extension/int_extension.dart';
 import '../../../manager/callback_manager.dart';
 import '../../../manager/preferences_manager.dart';
 import '../../dialog/clear_cache_dialog.dart';
 import '../../dialog/preset_color_picker_dialog.dart';
+import '../changelog_screen/changelog_screen.dart';
 import 'bloc/settings_bloc.dart';
 import 'bloc/settings_bloc_state.dart';
 import 'widget/settings_item_widget.dart';
@@ -49,7 +49,7 @@ class _SettingsScreenState
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
       body: SingleChildScrollView(
-        padding: context.defaultListPadding(),
+        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -136,7 +136,7 @@ class _SettingsScreenState
                 builder: (context, state) {
                   return Text(
                     'v${bloc.currentVersion}',
-                    style: AppTextStyle.s14,
+                    style: AppTextStyle.s12Bold,
                   );
                 },
               ),
@@ -168,6 +168,18 @@ class _SettingsScreenState
                       ),
                     );
                   },
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute<dynamic>(
+                        builder: (_) => const ChangelogScreen()));
+                  },
+                  dense: true,
+                  title: const Text(
+                    'Changelog',
+                    style: AppTextStyle.s14,
+                  ),
+                  trailing: const Icon(Icons.chevron_right_rounded),
                 ),
               ],
             ),

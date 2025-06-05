@@ -1,7 +1,7 @@
 name: revanced_manager_flutter
 description: 'A fun project, rebuilding the original ReVanced Manager using Flutter framework.'
 publish_to: 'none'
-version: 1.4.0+19
+version: 2.0.0+20
 
 scripts:
   clean: 'flutter clean && flutter pub get'

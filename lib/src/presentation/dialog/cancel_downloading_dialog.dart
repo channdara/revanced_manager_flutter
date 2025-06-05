@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/app_text_style.dart';
 import '../../model/revanced_application.dart';
+import '../widget/cached_network_image_widget.dart';
 
 void showCancelDownloadingDialog(
   BuildContext context,
@@ -31,10 +31,7 @@ void showCancelDownloadingDialog(
               ),
             ),
             ListTile(
-              leading: CachedNetworkImage(
-                imageUrl: app.icon,
-                fit: BoxFit.cover,
-              ),
+              leading: CachedNetworkImageWidget(imageUrl: app.icon),
               title: Text(app.appName, style: AppTextStyle.s16Bold),
               subtitle: Text(
                 app.appShortDescription,

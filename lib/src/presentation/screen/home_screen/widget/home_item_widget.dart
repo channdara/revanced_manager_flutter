@@ -1,19 +1,19 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/app_text_style.dart';
 import '../../../../model/revanced_application.dart';
-import '../bloc/main_bloc.dart';
-import 'main_item_action_widget.dart';
+import '../../../widget/cached_network_image_widget.dart';
+import '../bloc/home_bloc.dart';
+import 'home_item_action_widget.dart';
 
-class MainItemWidget extends StatelessWidget {
-  const MainItemWidget({
+class HomeItemWidget extends StatelessWidget {
+  const HomeItemWidget({
     super.key,
     required this.bloc,
     required this.app,
   });
 
-  final MainBloc bloc;
+  final HomeBloc bloc;
   final RevancedApplication app;
 
   @override
@@ -26,13 +26,10 @@ class MainItemWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 64.0,
-                width: 64.0,
+                height: 50.0,
+                width: 50.0,
                 margin: const EdgeInsets.all(16.0),
-                child: CachedNetworkImage(
-                  imageUrl: app.icon,
-                  fit: BoxFit.cover,
-                ),
+                child: CachedNetworkImageWidget(imageUrl: app.icon),
               ),
               Expanded(
                 child: Padding(
@@ -44,10 +41,10 @@ class MainItemWidget extends StatelessWidget {
                         app.appName,
                         style: AppTextStyle.s16Bold,
                       ),
-                      const SizedBox(height: 4.0),
+                      const SizedBox(height: 8.0),
                       Text(
                         app.appShortDescription,
-                        style: AppTextStyle.s12Grey,
+                        style: AppTextStyle.s12,
                       ),
                     ],
                   ),
@@ -78,7 +75,7 @@ class MainItemWidget extends StatelessWidget {
               ],
             ),
           ),
-          MainItemActionWidget(bloc: bloc, app: app),
+          HomeItemActionWidget(bloc: bloc, app: app),
         ],
       ),
     );

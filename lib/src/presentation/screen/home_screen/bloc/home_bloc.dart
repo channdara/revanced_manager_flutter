@@ -39,6 +39,9 @@ class HomeBloc extends BaseBloc {
     return copy;
   }
 
+  int get updateAvailableCount =>
+      _backupItem.where((e) => e.updateAvailable).length;
+
   DownloadStatus? getStatus(String id) => _mapItem[id];
 
   @override

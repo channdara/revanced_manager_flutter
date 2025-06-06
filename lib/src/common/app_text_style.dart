@@ -18,6 +18,8 @@ class AppTextStyle {
       TextStyle(fontSize: 12.0, fontVariations: _normal);
   static const TextStyle s12Bold =
       TextStyle(fontSize: 12.0, fontVariations: _bold);
+  static const TextStyle s12BoldGreen =
+      TextStyle(fontSize: 12.0, fontVariations: _bold, color: Colors.green);
   static const TextStyle s12Grey = TextStyle(
     fontSize: 12.0,
     fontVariations: _normal,

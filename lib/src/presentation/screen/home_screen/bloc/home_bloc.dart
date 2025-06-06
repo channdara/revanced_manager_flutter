@@ -7,32 +7,29 @@ import '../../../../manager/api_manager.dart';
 import '../../../../manager/application_manager.dart';
 import '../../../../manager/download_manager.dart';
 import '../../../../model/download_status.dart';
-import '../../../../model/home_tab_bar.dart';
+import '../../../../model/home_filter.dart';
 import '../../../../model/revanced_application.dart';
 import 'home_bloc_state.dart';
 
+final ScrollController homeScrollController = ScrollController();
+
 class HomeBloc extends BaseBloc {
-  late TabController tabController;
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
-  final ScrollController scrollController = ScrollController();
   bool searchAppBar = false;
+  HomeFilter selectedFilter = HomeFilter.ALL;
 
   final Map<String, DownloadStatus> _mapItem = {};
   List<RevancedApplication> _backupItem = [];
-  HomeTabBar _selectedTab = HomeTabBar.ALL;
   String _searchText = '';
 
-  bool get canPop =>
-      scrollController.hasClients && scrollController.offset < 50.0;
-
   List<RevancedApplication> get items {
-    final copy = switch (_selectedTab) {
-      HomeTabBar.ALL => _backupItem,
-      HomeTabBar.INSTALLED => _backupItem.where((e) => e.isInstalled).toList(),
-      HomeTabBar.NOT_INSTALLED =>
+    final copy = switch (selectedFilter) {
+      HomeFilter.ALL => _backupItem,
+      HomeFilter.INSTALLED => _backupItem.where((e) => e.isInstalled).toList(),
+      HomeFilter.NOT_INSTALLED =>
         _backupItem.where((e) => !e.isInstalled).toList(),
-      HomeTabBar.UPDATE => _backupItem.where((e) => e.updateAvailable).toList(),
+      HomeFilter.UPDATE => _backupItem.where((e) => e.updateAvailable).toList(),
     };
     if (_searchText.isNotEmpty) {
       return copy.where((e) {
@@ -47,34 +44,15 @@ class HomeBloc extends BaseBloc {
   @override
   void dispose() {
     _mapItem.values.forEach((e) => e.timer?.cancel());
-    _mapItem.clear();
-    _backupItem.clear();
-    _selectedTab = HomeTabBar.ALL;
     super.dispose();
-  }
-
-  void initialize(TickerProvider vsync) {
-    tabController = TabController(
-      length: HomeTabBar.values.length,
-      vsync: vsync,
-    );
-  }
-
-  void animateToTop() {
-    if (scrollController.offset < 100) return;
-    scrollController.animateTo(
-      0.0,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.linear,
-    );
   }
 
   void reloadApplications() {
     refreshIndicatorKey.currentState?.show();
   }
 
-  void onTabBarChanged(int index) {
-    _selectedTab = HomeTabBar.values[index];
+  void onChoiceChipSelected(HomeFilter filter) {
+    selectedFilter = filter;
     safeEmit(HomeStateGotData());
   }
 

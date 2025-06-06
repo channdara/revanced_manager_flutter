@@ -5,7 +5,7 @@ import '../../../base/base_bloc_state.dart';
 import '../../../base/base_stateful_bloc.dart';
 import '../../../common/app_text_style.dart';
 import '../../../manager/callback_manager.dart';
-import '../../../model/home_tab_bar.dart';
+import '../../../model/home_filter.dart';
 import '../../../model/mock_data.dart';
 import '../../widget/app_empty_widget.dart';
 import '../../widget/app_error_widget.dart';
@@ -20,15 +20,13 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends BaseStatefulBloc<HomeScreen, HomeBloc>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends BaseStatefulBloc<HomeScreen, HomeBloc> {
   @override
   HomeBloc bloc = HomeBloc();
 
   @override
   void initState() {
     super.initState();
-    bloc.initialize(this);
     CallbackManager().appInstallCompleteCallback = bloc.reloadApplications;
     CallbackManager().appUninstallCompleteCallback = bloc.reloadApplications;
   }
@@ -88,17 +86,40 @@ class _HomeScreenState extends BaseStatefulBloc<HomeScreen, HomeBloc>
               ),
             ),
           ],
-          bottom: TabBar(
-            onTap: bloc.onTabBarChanged,
-            controller: bloc.tabController,
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
-            dividerColor: Colors.transparent,
-            splashBorderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12.0),
-              topRight: Radius.circular(12.0),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(44.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  bottom: 8.0,
+                  right: 8.0,
+                ),
+                child: Row(
+                  children: HomeFilter.values.map((filter) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: bloc.builder(
+                        buildWhen: (p, c) => c is HomeStateGotData,
+                        builder: (context, state) {
+                          return ChoiceChip(
+                            onSelected: (selected) {
+                              bloc.onChoiceChipSelected(filter);
+                            },
+                            label: Text(filter.label),
+                            selected: filter == bloc.selectedFilter,
+                            labelStyle: AppTextStyle.s12,
+                            showCheckmark: false,
+                          );
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
             ),
-            tabs: HomeTabBar.values.map((e) => Tab(text: e.label)).toList(),
           ),
         ),
         body: bloc.builder(
@@ -120,8 +141,8 @@ class _HomeScreenState extends BaseStatefulBloc<HomeScreen, HomeBloc>
                 key: bloc.refreshIndicatorKey,
                 onRefresh: bloc.refreshRevancedApplications,
                 child: ListView.builder(
-                  controller: bloc.scrollController,
-                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 64.0),
+                  controller: homeScrollController,
+                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: itemCount,
                   itemBuilder: (context, index) {
@@ -133,11 +154,6 @@ class _HomeScreenState extends BaseStatefulBloc<HomeScreen, HomeBloc>
               ),
             );
           },
-        ),
-        floatingActionButton: FloatingActionButton.small(
-          onPressed: bloc.animateToTop,
-          elevation: 1.0,
-          child: const Icon(Icons.arrow_upward_rounded),
         ),
       ),
     );

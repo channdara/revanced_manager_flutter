@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../about_screen.dart';
+import '../home_screen/bloc/home_bloc.dart';
 import '../home_screen/home_screen.dart';
 import '../settings_screen/settings_screen.dart';
 
@@ -16,9 +17,25 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   void _onDestinationSelected(int index) {
-    if (index == _selectedIndex) return;
+    if (index == _selectedIndex) {
+      if (index == 0 && homeScrollController.offset > 100.0) {
+        homeScrollController.animateTo(
+          0.0,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.linear,
+        );
+        return;
+      }
+      return;
+    }
     _selectedIndex = index;
     setState(() {});
+  }
+
+  @override
+  void dispose() {
+    homeScrollController.dispose();
+    super.dispose();
   }
 
   @override

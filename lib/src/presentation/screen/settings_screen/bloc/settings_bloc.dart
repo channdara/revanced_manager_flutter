@@ -27,6 +27,11 @@ class SettingsBloc extends BaseBloc {
     super.dispose();
   }
 
+  void initialRequiredData() {
+    getCurrentAppVersion();
+    getCacheDirectorySize();
+  }
+
   void openLinkInExternalBrowser(String? uri) {
     if (uri == null || uri.isEmpty) return;
     launchUrl(Uri.parse(uri), mode: LaunchMode.externalApplication);

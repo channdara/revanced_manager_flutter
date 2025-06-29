@@ -4,6 +4,7 @@ typedef EnableDarkModeCallback = void Function(Brightness brightness);
 typedef UpdateAccentColorCallback = void Function(Color color);
 typedef AppInstallCompleteCallback = void Function();
 typedef AppUninstallCompleteCallback = void Function();
+typedef ReloadSettingScreenCallback = void Function();
 
 class CallbackManager {
   factory CallbackManager() => _instance;
@@ -16,4 +17,5 @@ class CallbackManager {
   UpdateAccentColorCallback? updateAccentColorCallback;
   AppInstallCompleteCallback? appInstallCompleteCallback;
   AppUninstallCompleteCallback? appUninstallCompleteCallback;
+  ReloadSettingScreenCallback? reloadSettingScreenCallback;
 }

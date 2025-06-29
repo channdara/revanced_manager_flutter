@@ -14,9 +14,7 @@ import 'bloc/settings_bloc_state.dart';
 import 'widget/settings_item_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key, this.autoCheckUpdate = false});
-
-  final bool autoCheckUpdate;
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -30,18 +28,10 @@ class _SettingsScreenState
   @override
   void initState() {
     super.initState();
-    bloc.getCurrentAppVersion();
-    bloc.getCacheDirectorySize();
-  }
-
-  @override
-  void initStatePostFrameCallback() {
-    super.initStatePostFrameCallback();
-    if (widget.autoCheckUpdate) {
-      Future.delayed(const Duration(milliseconds: 200), () {
-        bloc.checkForUpdate();
-      });
-    }
+    bloc.initialRequiredData();
+    CallbackManager().reloadSettingScreenCallback = () {
+      bloc.initialRequiredData();
+    };
   }
 
   @override

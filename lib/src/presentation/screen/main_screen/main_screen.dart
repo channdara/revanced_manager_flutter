@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../manager/callback_manager.dart';
 import '../about_screen.dart';
 import '../home_screen/bloc/home_bloc.dart';
 import '../home_screen/home_screen.dart';
@@ -16,6 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   void _onDestinationSelected(int index) {
+    if (index == 2) CallbackManager().reloadSettingScreenCallback?.call();
     if (index == _selectedIndex) {
       if (index == 0 && homeScrollController.offset > 100.0) {
         homeScrollController.animateTo(

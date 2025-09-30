@@ -65,7 +65,8 @@ class SettingsBloc extends BaseBloc {
 
   Future<void> getCurrentAppVersion() async {
     final package = await PackageInfo.fromPlatform();
-    currentVersion = '${package.version}+${package.buildNumber}';
+    final buildNumber = int.parse(package.buildNumber) % 1000;
+    currentVersion = '${package.version}+$buildNumber';
     lastUpdateCheck = await PreferencesManager().lastUpdateCheck();
     safeEmit(SettingsStateGotCurrentVersion());
   }

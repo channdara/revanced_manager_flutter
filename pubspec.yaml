@@ -5,7 +5,8 @@ version: 2.0.6+26
 
 scripts:
   clean: 'flutter clean && flutter pub get'
-  build: 'flutter build apk --release'
+  build: 'flutter build apk'
+  build_split: 'flutter build apk --split-per-abi'
   rename: 'dart run lib/script/copy_rename_apk_file.dart'
   open: 'open build/app/outputs/flutter-apk'
   prod: 'rps clean && rps build && rps rename && rps open'

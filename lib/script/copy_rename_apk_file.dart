@@ -18,18 +18,16 @@ import 'package:yaml/yaml.dart';
 /// dart run copy_rename_apk_file.dart prod
 ///
 /// Feel free to modify as you needed.
-Future<void> main(List<String> args) async {
+Future<void> main() async {
   try {
-    final env = args.elementAtOrNull(0) ?? '';
-    final appName = env.isEmpty ? 'app-release.apk' : 'app-$env-release.apk';
+    const appName = 'app-arm64-v8a-release.apk';
     final file = File('build/app/outputs/flutter-apk/$appName');
     if (file.existsSync()) {
       final content = await File('pubspec.yaml').readAsString();
       final yaml = await loadYaml(content);
       final version = yaml['version'].toString();
       final name = yaml['name'].toString();
-      final newAppName =
-          env.isEmpty ? '${name}_$version.apk' : '${name}_${env}_$version.apk';
+      final newAppName = '${name}_$version.apk';
       final newPath = '${file.parent.path}/$newAppName';
       await file.copy(newPath);
     }

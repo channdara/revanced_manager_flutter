@@ -10,7 +10,7 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
-
+import androidx.core.net.toUri
 
 class MainActivity : FlutterActivity() {
     companion object {
@@ -86,7 +86,7 @@ class MainActivity : FlutterActivity() {
 
     private fun uninstallApk(packageName: String): Boolean {
         try {
-            val uri = Uri.parse("package:$packageName")
+            val uri = "package:$packageName".toUri()
             val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
             intent.data = uri
             startActivity(intent)

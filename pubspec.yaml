@@ -1,7 +1,7 @@
 name: revanced_manager_flutter
 description: 'A fun project, rebuilding the original RV Manager using Flutter framework.'
 publish_to: 'none'
-version: 2.1.0+26
+version: 2.1.1+27
 
 scripts:
   clean: 'flutter clean && flutter pub get'

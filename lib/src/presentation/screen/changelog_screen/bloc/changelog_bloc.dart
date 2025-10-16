@@ -13,7 +13,8 @@ class ChangelogBloc extends BaseBloc {
     execute(requesting: () async {
       emitLoading();
       final package = await PackageInfo.fromPlatform();
-      currentVersion = '${package.version}+${package.buildNumber}';
+      final buildNumber = int.parse(package.buildNumber) % 1000;
+      currentVersion = '${package.version}+$buildNumber';
       latest = await ApiManager().getMyAppLatestRelease();
       final releases = await ApiManager().getMyAppAllReleases();
       emitLoaded();

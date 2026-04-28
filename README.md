@@ -5,7 +5,7 @@ popular app named Vanced Manager. We've taken the concept and enhanced it to pro
 managing and updating your favorite apps.
 
 * RV Website: https://vanced.to
-* RV Manager GitHub: https://github.com/vancedapps/rv-manager
+* RV Manager GitHub: https://github.com/vancedto/vanced-manager-plus
 
 # This Project: Revanced Manager with Flutter framework
 

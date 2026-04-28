@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.view.WindowManager
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import io.flutter.embedding.android.FlutterActivity
@@ -55,6 +56,14 @@ class MainActivity : FlutterActivity() {
                         result.success(getPackageInfo(it))
                     }
                 }
+
+                "enableKeepScreenOn" -> {
+                    window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                }
+
+                "disableKeepScreenOn" -> {
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                }
             }
         }
     }
@@ -68,11 +77,7 @@ class MainActivity : FlutterActivity() {
     private fun installApk(filePath: String): Boolean {
         try {
             val file = File(filePath)
-            val uri = FileProvider.getUriForFile(
-                this,
-                "com.mastertipsy.revancedmanager",
-                file,
-            )
+            val uri = FileProvider.getUriForFile(this, CHANNEL, file)
             val intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
             intent.data = uri
             intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION

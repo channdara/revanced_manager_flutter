@@ -9,7 +9,7 @@
         android:name="${applicationName}"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Revanced Manager">
+        android:label="URVM">
 
         <provider
             android:name="androidx.core.content.FileProvider"

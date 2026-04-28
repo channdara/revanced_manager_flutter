@@ -43,7 +43,7 @@ class _SplashScreenState extends BaseStateful<SplashScreen> {
         padding: EdgeInsets.zero,
         child: Center(
           child: Text(
-            'This is not the original ReVanced Manager',
+            'URVM: Unofficial RV Manager',
             style: AppTextStyle.s14,
           ),
         ),

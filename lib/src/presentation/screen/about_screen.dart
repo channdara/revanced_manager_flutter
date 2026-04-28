@@ -51,7 +51,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
                 ListTile(
                   onTap: () {
                     bloc.openLinkInExternalBrowser(
-                      'https://github.com/vancedapps/rv-manager',
+                      'https://github.com/vancedto/vanced-manager-plus',
                     );
                   },
                   dense: true,
@@ -75,7 +75,7 @@ class _AboutScreenState extends BaseStatefulBloc<AboutScreen, SettingsBloc> {
               ],
             ),
             SettingsItemWidget(
-              titleLabel: 'Revanced Manager',
+              titleLabel: 'URVM: Unofficial RV Manager',
               children: [
                 const ListTile(
                   dense: true,

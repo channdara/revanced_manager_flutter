@@ -86,4 +86,12 @@ class ApplicationManager {
       }
     });
   }
+
+  void enableKeepScreenOn() {
+    _channel.invokeMethod('enableKeepScreenOn');
+  }
+
+  void disableKeepScreenOn() {
+    _channel.invokeMethod('disableKeepScreenOn');
+  }
 }

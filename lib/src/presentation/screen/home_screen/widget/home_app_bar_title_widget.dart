@@ -35,7 +35,7 @@ class HomeAppBarTitleWidget extends StatelessWidget {
                   hintText: 'Find applications...',
                 ),
               )
-            : const Text('Revanced Manager');
+            : const Text('URVM: Unofficial RV Manager');
       },
     );
   }
